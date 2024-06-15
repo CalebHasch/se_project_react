@@ -1,15 +1,27 @@
-// import { useState } from 'react'
 import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import fetchWeather from "../../utils/weatherApi";
-
+import Footer from "./Footer/Foot";
+import { fetchWeather, filterWeatherData } from "../../utils/weatherApi";
+import { baseUrl } from "../../utils/constants";
 import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
-  // fetchWeather();
+  const [weatherData, setWeatherData] = useState({
+    temp: { F: 999 },
+    location: "",
+  });
+
+  useEffect(() => {
+    fetchWeather(baseUrl)
+      .then((res) => {
+        const data = filterWeatherData(res);
+        setWeatherData(data);
+      })
+      .catch(console.error());
+  }, []);
   return (
     <>
-      <Header />
+      <Header weatherData={weatherData} />
       <Footer />
     </>
   );

@@ -1,16 +1,18 @@
-import { baseUrl } from "./constants";
-
-function fetchWeather() {
-  return fetch(`${baseUrl}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(this._processResponse)
-    .then((res) => {
-      console.log(res);
-      return res;
-    });
+function fetchWeather(baseUrl) {
+  return fetch(`${baseUrl}`, {}).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  });
 }
 
-export default fetchWeather;
+function filterWeatherData(data) {
+  const obj = {};
+  obj.location = data.name;
+  obj.temp = { F: data.main.temp };
+
+  return obj;
+}
+
+export { fetchWeather, filterWeatherData };

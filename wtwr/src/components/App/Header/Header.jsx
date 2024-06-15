@@ -2,19 +2,18 @@ import headerLogo from "../../../assets/wtwr-logo.png";
 import avatar from "../../../assets/avatar.png";
 import "./Header.css";
 
-function Header() {
+function Header({ weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
-  const location = "location";
 
   return (
     <div className="header">
       <div className="headerContainer">
         <img className="headerLogo" src={headerLogo} />
         <h2 className="headerLocationTime">
-          {currentDate}, {location}
+          {currentDate}, {weatherData.location}
         </h2>
       </div>
       <div className="headerContainer">
