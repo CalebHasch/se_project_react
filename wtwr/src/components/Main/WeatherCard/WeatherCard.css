@@ -1,0 +1,10 @@
+.weatherCard {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.weatherCardImg {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}

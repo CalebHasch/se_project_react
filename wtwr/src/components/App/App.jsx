@@ -1,7 +1,12 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Foot";
-import { fetchWeather, filterWeatherData } from "../../utils/weatherApi";
-import { baseUrl } from "../../utils/constants";
+import Main from "../Main/Main";
+import {
+  fetchWeather,
+  filterWeatherData,
+  gaugeTemp,
+} from "../../utils/weatherApi";
+import { baseUrl, defaultClothingItems } from "../../utils/constants";
 import "./App.css";
 import { useEffect, useState } from "react";
 
@@ -22,6 +27,11 @@ function App() {
   return (
     <>
       <Header weatherData={weatherData} />
+      <Main
+        weatherData={weatherData}
+        defaultClothingItems={defaultClothingItems}
+        gaugeTemp={gaugeTemp}
+      />
       <Footer />
     </>
   );

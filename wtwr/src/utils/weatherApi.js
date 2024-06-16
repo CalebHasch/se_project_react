@@ -15,4 +15,14 @@ function filterWeatherData(data) {
   return obj;
 }
 
-export { fetchWeather, filterWeatherData };
+function gaugeTemp(temp) {
+  if (temp >= 86) {
+    return "hot";
+  } else if (temp >= 60) {
+    return "warm";
+  } else {
+    return "cold";
+  }
+}
+
+export { fetchWeather, filterWeatherData, gaugeTemp };
