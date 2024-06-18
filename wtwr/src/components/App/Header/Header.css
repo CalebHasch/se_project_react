@@ -1,18 +1,37 @@
 .header {
   display: flex;
   justify-content: space-between;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.headerContainer {
+.header__container {
   display: flex;
+  align-items: center;
 }
 
-.headerLogo {
+.header__logo {
   width: 89px;
   height: 40px;
+  margin-right: 24px;
 }
 
-.headerAvatar {
+.header__location-time {
+  margin: 0;
+}
+
+.header__add-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.header__username {
+  line-height: 1.24;
+  margin: 0 12px 0 20px;
+}
+
+.header__avatar {
   width: 40px;
   height: 40px;
 }

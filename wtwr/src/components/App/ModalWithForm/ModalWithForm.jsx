@@ -1,3 +1,5 @@
+import "./ModalWithForm.css";
+
 export default function ModalWithForm() {
   return (
     <div className="modal" id="add-card-modal">
@@ -13,9 +15,9 @@ export default function ModalWithForm() {
             <input
               type="text"
               className="form__input"
-              id="form__title"
-              name="title"
-              placeholder="Title"
+              id="form__name"
+              name="name"
+              placeholder="Name"
               required
               maxLength="30"
             />
@@ -30,6 +32,36 @@ export default function ModalWithForm() {
               placeholder="Image link"
               required
             />
+            <span className="form__error"></span>
+          </label>
+          <label className="form__field">
+            <input
+              type="radio"
+              className="form__input"
+              name="weather"
+              required
+            />
+            Hot
+            <span className="form__error"></span>
+          </label>
+          <label className="form__field">
+            <input
+              type="radio"
+              className="form__input"
+              name="weather"
+              required
+            />
+            Warm
+            <span className="form__error"></span>
+          </label>
+          <label className="form__field">
+            <input
+              type="radio"
+              className="form__input"
+              name="weather"
+              required
+            />
+            Cold
             <span className="form__error"></span>
           </label>
         </fieldset>

@@ -1,0 +1,13 @@
+.main {
+}
+
+.main__text {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.main__list {
+  list-style: none;
+}

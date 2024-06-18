@@ -1,6 +1,7 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Foot";
 import Main from "../Main/Main";
+import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import {
   fetchWeather,
   filterWeatherData,
@@ -25,15 +26,18 @@ function App() {
       .catch(console.error());
   }, []);
   return (
-    <>
-      <Header weatherData={weatherData} />
-      <Main
-        weatherData={weatherData}
-        defaultClothingItems={defaultClothingItems}
-        gaugeTemp={gaugeTemp}
-      />
-      <Footer />
-    </>
+    <div className="page">
+      <div className="page__content">
+        <Header weatherData={weatherData} />
+        <ModalWithForm />
+        <Main
+          weatherData={weatherData}
+          defaultClothingItems={defaultClothingItems}
+          gaugeTemp={gaugeTemp}
+        />
+        <Footer />
+      </div>
+    </div>
   );
 }
 

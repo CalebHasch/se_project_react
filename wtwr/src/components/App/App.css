@@ -1,0 +1,9 @@
+.page {
+  /* background-color: #f3f3f3; */
+  font-family: "Cabinet";
+  line-height: 1.2;
+}
+
+.page__content {
+  margin: 0, auto;
+}

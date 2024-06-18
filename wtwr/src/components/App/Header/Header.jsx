@@ -2,7 +2,7 @@ import headerLogo from "../../../assets/wtwr-logo.png";
 import avatar from "../../../assets/avatar.png";
 import "./Header.css";
 
-function Header({ weatherData }) {
+export default function Header({ weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -10,19 +10,17 @@ function Header({ weatherData }) {
 
   return (
     <div className="header">
-      <div className="headerContainer">
-        <img className="headerLogo" src={headerLogo} />
-        <h2 className="headerLocationTime">
+      <div className="header__container">
+        <img className="header__logo" src={headerLogo} />
+        <p className="header__location-time">
           {currentDate}, {weatherData.location}
-        </h2>
+        </p>
       </div>
-      <div className="headerContainer">
-        <button className="headerButton">+ Add clothes</button>
-        <h2 className="headerUserName">Terrence Tegegne</h2>
-        <img className="headerAvatar" src={avatar} />
+      <div className="header__container">
+        <button className="header__add-button">+ Add clothes</button>
+        <p className="header__username">Terrence Tegegne</p>
+        <img className="header__avatar" src={avatar} />
       </div>
     </div>
   );
 }
-
-export default Header;

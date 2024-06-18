@@ -1,6 +1,7 @@
 import WeatherCard from "./WeatherCard/WeatherCard";
 import ItemCard from "./ItemCard/ItemCard";
 import { useEffect, useState } from "react";
+import "./Main.css";
 
 export default function Main({ weatherData, gaugeTemp, defaultClothingItems }) {
   const [clothes, setClothes] = useState([]);
@@ -20,7 +21,10 @@ export default function Main({ weatherData, gaugeTemp, defaultClothingItems }) {
   return (
     <>
       <WeatherCard weatherData={weatherData} />
-      <ul>
+      <p className="main__text">
+        Today is {Math.round(weatherData.temp.F)}&deg;F / You may want to wear:
+      </p>
+      <ul className="main__list">
         {clothes.map((item) => {
           return (
             <li key={item._id}>
