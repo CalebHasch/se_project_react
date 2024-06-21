@@ -1,0 +1,39 @@
+.card {
+  background-color: white;
+  max-width: 75vw;
+  max-height: 75vh;
+  width: 498px;
+  border-radius: 10px;
+  padding-bottom: 112px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card__image {
+  border-radius: 10px 10px 0 0;
+  max-width: 75vw;
+  max-height: 75vh;
+  width: 498px;
+  height: 498px;
+}
+
+.card__close-button:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.card__text {
+  margin: 20px 32px 0;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.card__title:last-of-type {
+  margin-top: 12px;
+}

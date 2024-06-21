@@ -1,8 +1,8 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Foot";
 import Main from "../Main/Main";
-import ModalWithForm from "./ModalWithForm/ModalWithForm";
-import ItemModal from "./ItemModal/ItemModal";
+import ModalWithForm from "./Modals/ModalWithForm/ModalWithForm";
+import ItemModal from "./Modals/ItemModal/ItemModal";
 import {
   fetchWeather,
   filterWeatherData,
@@ -21,6 +21,23 @@ function App() {
 
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
+  const [modalClothingItem, setModalClothingItem] = useState({
+    name: "",
+    linke: "",
+    weather: "",
+  });
+
+  const itemModal = document.querySelector("#itemModal");
+
+  function closeModal() {
+    itemModal.classList.remove("modal_opened");
+  }
+
+  function handleCardClick(item) {
+    itemModal.classList.add("modal_opened");
+    setModalClothingItem(item);
+  }
+
   useEffect(() => {
     fetchWeather(baseUrl)
       .then((res) => {
@@ -33,15 +50,16 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header weatherData={weatherData} />
-        <ModalWithForm />
-        <ItemModal />
         <Main
           weatherData={weatherData}
           clothingItems={clothingItems}
           gaugeTemp={gaugeTemp}
+          handleCardClick={handleCardClick}
         />
         <Footer />
       </div>
+      <ModalWithForm />
+      <ItemModal clothingItem={modalClothingItem} onClose={closeModal} />
     </div>
   );
 }

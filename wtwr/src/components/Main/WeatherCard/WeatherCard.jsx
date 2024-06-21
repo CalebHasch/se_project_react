@@ -42,7 +42,6 @@ export default function WeatherCard({ weatherData }) {
     }
 
     if (bannerSet[data.condition]) {
-      console.log(bannerSet[data.condition]);
       return bannerSet[data.condition];
     } else {
       return bannerSet.clear;
@@ -51,12 +50,9 @@ export default function WeatherCard({ weatherData }) {
 
   function isDay(data) {
     const time = Date.now() / 1000;
-    console.log(data);
     if (time >= data.sunStatus.sunrise && time < data.sunStatus.sunset) {
-      console.log("day");
       return true;
     } else {
-      console.log("night");
       return false;
     }
   }

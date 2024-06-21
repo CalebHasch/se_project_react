@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import "../Modal.css";
 
 export default function ModalWithForm() {
   return (

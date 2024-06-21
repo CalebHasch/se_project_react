@@ -1,0 +1,33 @@
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 50%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    visibility 1s,
+    opacity 0.25s linear;
+  z-index: 2;
+}
+
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal__close {
+  width: 16px;
+  height: 16px;
+  background-image: url(../../../assets/closeIcon.png);
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.modal__close_color_white {
+  background-image: url(../../../assets/whiteCloseIcon.png);
+}
