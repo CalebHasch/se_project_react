@@ -2,6 +2,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Foot";
 import Main from "../Main/Main";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
+import ItemModal from "./ItemModal/ItemModal";
 import {
   fetchWeather,
   filterWeatherData,
@@ -13,9 +14,12 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-    temp: { F: 999 },
+    temp: { F: "999" },
     location: "",
+    sunStatus: { sunset: "", sunrise: "" },
   });
+
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   useEffect(() => {
     fetchWeather(baseUrl)
@@ -30,9 +34,10 @@ function App() {
       <div className="page__content">
         <Header weatherData={weatherData} />
         <ModalWithForm />
+        <ItemModal />
         <Main
           weatherData={weatherData}
-          defaultClothingItems={defaultClothingItems}
+          clothingItems={clothingItems}
           gaugeTemp={gaugeTemp}
         />
         <Footer />

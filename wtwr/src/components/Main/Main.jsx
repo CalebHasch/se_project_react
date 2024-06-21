@@ -3,7 +3,7 @@ import ItemCard from "./ItemCard/ItemCard";
 import { useEffect, useState } from "react";
 import "./Main.css";
 
-export default function Main({ weatherData, gaugeTemp, defaultClothingItems }) {
+export default function Main({ weatherData, gaugeTemp, clothingItems }) {
   const [clothes, setClothes] = useState([]);
 
   function getWeatherAppropiateClothes(weather, clothes) {
@@ -15,7 +15,7 @@ export default function Main({ weatherData, gaugeTemp, defaultClothingItems }) {
 
   useEffect(() => {
     const weather = gaugeTemp(weatherData.temp.F);
-    getWeatherAppropiateClothes(weather, defaultClothingItems);
+    getWeatherAppropiateClothes(weather, clothingItems);
   }, [weatherData]);
 
   return (

@@ -9,6 +9,10 @@
   position: relative;
   top: 15px;
   text-align: center;
+  background-color: white;
+  width: max-content;
+  padding: 0 12px;
+  margin: 0 auto;
 }
 
 .item-card__img {
@@ -16,5 +20,6 @@
   top: 0;
   object-fit: cover;
   width: 100%;
+  border-radius: 12px;
   z-index: -1;
 }
