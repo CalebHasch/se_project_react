@@ -3,7 +3,7 @@ import "../Modal.css";
 
 export default function ModalWithForm() {
   return (
-    <div className="modal" id="add-card-modal">
+    <div className="modal modal_opened" id="add-card-modal">
       <form className="modal__form form" id="form-add-card">
         <button
           className="form__close-button modal__close"
@@ -13,6 +13,7 @@ export default function ModalWithForm() {
         <h2 className="form__title">New Garment</h2>
         <fieldset className="form__set">
           <label className="form__field">
+            Name
             <input
               type="text"
               className="form__input"
@@ -20,17 +21,17 @@ export default function ModalWithForm() {
               name="name"
               placeholder="Name"
               required
-              maxLength="30"
             />
             <span className="form__error"></span>
           </label>
           <label className="form__field">
+            Image
             <input
               type="url"
               className="form__input"
               id="form__image-link"
               name="link"
-              placeholder="Image link"
+              placeholder="Image URL"
               required
             />
             <span className="form__error"></span>
