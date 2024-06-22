@@ -1,8 +1,8 @@
-import Header from "./Header/Header";
-import Footer from "./Footer/Foot";
+import Header from "../Header/Header";
+import Footer from "../Footer/Foot";
 import Main from "../Main/Main";
-import ModalWithForm from "./Modals/ModalWithForm/ModalWithForm";
-import ItemModal from "./Modals/ItemModal/ItemModal";
+import ModalWithForm from "../Modals/ModalWithForm/ModalWithForm";
+import ItemModal from "../Modals/ItemModal/ItemModal";
 import {
   fetchWeather,
   filterWeatherData,

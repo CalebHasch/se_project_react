@@ -27,6 +27,11 @@
   padding: 0;
 }
 
+.header__add-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 .header__username {
   line-height: 1.24;
   margin: 0 12px 0 20px;

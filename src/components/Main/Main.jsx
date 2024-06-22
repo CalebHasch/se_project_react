@@ -1,5 +1,5 @@
-import WeatherCard from "./WeatherCard/WeatherCard";
-import ItemCard from "./ItemCard/ItemCard";
+import WeatherCard from "../WeatherCard/WeatherCard";
+import ItemCard from "../ItemCard/ItemCard";
 import { useEffect, useState } from "react";
 import "./Main.css";
 

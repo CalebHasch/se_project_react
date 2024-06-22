@@ -1,5 +1,5 @@
-import headerLogo from "../../../assets/wtwr-logo.png";
-import avatar from "../../../assets/avatar.png";
+import headerLogo from "../../assets/wtwr-logo.png";
+import avatar from "../../assets/avatar.png";
 import "./Header.css";
 
 export default function Header({ weatherData, handleButtonClick, modal }) {
@@ -11,7 +11,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
   return (
     <div className="header">
       <div className="header__container">
-        <img className="header__logo" src={headerLogo} />
+        <img className="header__logo" src={headerLogo} alt="WTWR logo" />
         <p className="header__location-time">
           {currentDate}, {weatherData.location}
         </p>
@@ -24,7 +24,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
           + Add clothes
         </button>
         <p className="header__username">Terrence Tegegne</p>
-        <img className="header__avatar" src={avatar} />
+        <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
       </div>
     </div>
   );

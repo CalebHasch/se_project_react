@@ -9,7 +9,7 @@ export default function ItemCard({ clothes, handleCardClick }) {
       }}
     >
       <p className="item-card__name">{clothes.name}</p>
-      <img className="item-card__img" src={clothes.link} />
+      <img className="item-card__img" src={clothes.link} alt={clothes.name} />
     </div>
   );
 }
