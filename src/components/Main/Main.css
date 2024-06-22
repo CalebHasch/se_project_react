@@ -16,3 +16,11 @@
   padding: 0;
   margin: 34px 0 100px;
 }
+
+@media screen and (max-width: 755px) {
+  .main__list {
+    margin: 20px 0 83px;
+    gap: 16px 15px;
+    grid-template-columns: repeat(auto-fill, 164px);
+  }
+}

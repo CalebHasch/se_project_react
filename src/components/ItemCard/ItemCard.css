@@ -27,3 +27,10 @@
 .item-card__img:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 755px) {
+  .item-card {
+    width: 164px;
+    height: 164px;
+  }
+}

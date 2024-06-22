@@ -41,3 +41,76 @@
   width: 40px;
   height: 40px;
 }
+
+.header__navigation {
+  display: none;
+}
+
+.header__navigation_shown {
+  display: inline;
+}
+
+.header__nav-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 208px;
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.header__close {
+  background-image: url(../../assets/blackCloseIcon.png);
+  background-color: transparent;
+  width: 21.21px;
+  height: 21.41px;
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  border: none;
+}
+
+.header__user-container {
+  margin: 60px auto 24px;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 755px) {
+  .header {
+    margin-top: 18px;
+  }
+
+  .header__container {
+    align-items: start;
+  }
+
+  .header__container:first-of-type {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .header__username {
+    margin: 0 12px 0 0;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .header__avatar_widescreen {
+    display: none;
+  }
+
+  .header__username_widescreen {
+    display: none;
+  }
+
+  .header__add-button_widescreen {
+    display: none;
+  }
+}
