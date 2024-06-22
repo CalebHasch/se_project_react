@@ -1,78 +1,35 @@
 import "./ModalWithForm.css";
 import "../Modal.css";
 
-export default function ModalWithForm() {
+export default function ModalWithForm({
+  onClose,
+  modal,
+  formElements,
+  children,
+}) {
   return (
-    <div className="modal modal_opened" id="add-card-modal">
-      <form className="modal__form form" id="form-add-card">
+    <div className="modal" id={`${formElements.name}-modal`}>
+      <form
+        className="modal__form form"
+        id={`${formElements.name}-form`}
+        name={formElements.name}
+      >
         <button
           className="form__close-button modal__close"
           type="button"
           aria-label="close"
+          onClick={() => onClose(modal)}
         ></button>
-        <h2 className="form__title">New Garment</h2>
         <fieldset className="form__set">
-          <label className="form__field">
-            Name
-            <input
-              type="text"
-              className="form__input"
-              id="form__name"
-              name="name"
-              placeholder="Name"
-              required
-            />
-            <span className="form__error"></span>
-          </label>
-          <label className="form__field">
-            Image
-            <input
-              type="url"
-              className="form__input"
-              id="form__image-link"
-              name="link"
-              placeholder="Image URL"
-              required
-            />
-            <span className="form__error"></span>
-          </label>
-          <label className="form__field">
-            <input
-              type="radio"
-              className="form__input"
-              name="weather"
-              required
-            />
-            Hot
-            <span className="form__error"></span>
-          </label>
-          <label className="form__field">
-            <input
-              type="radio"
-              className="form__input"
-              name="weather"
-              required
-            />
-            Warm
-            <span className="form__error"></span>
-          </label>
-          <label className="form__field">
-            <input
-              type="radio"
-              className="form__input"
-              name="weather"
-              required
-            />
-            Cold
-            <span className="form__error"></span>
-          </label>
+          <p className="form__title">{formElements.title}</p>
+          {children}
         </fieldset>
         <button
           type="submit"
-          className="form__submit-button form__submit-button_inactive"
-          disabled
+          className="form__submit-button form__submit-button_inactiv"
+          // disabled
         >
-          Create
+          {formElements.buttonText}
         </button>
       </form>
     </div>

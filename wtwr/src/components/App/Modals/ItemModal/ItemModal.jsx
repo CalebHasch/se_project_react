@@ -1,7 +1,7 @@
 import "../Modal.css";
 import "./ItemModal.css";
 
-export default function ItemModal({ onClose, clothingItem }) {
+export default function ItemModal({ onClose, clothingItem, modal }) {
   return (
     <div className="modal" id="itemModal">
       <div className="modal__card card">
@@ -9,7 +9,7 @@ export default function ItemModal({ onClose, clothingItem }) {
           className="card__close-button modal__close modal__close_color_white"
           type="button"
           aria-label="close"
-          onClick={onClose}
+          onClick={() => onClose(modal)}
         ></button>
         <img
           className="card__image"

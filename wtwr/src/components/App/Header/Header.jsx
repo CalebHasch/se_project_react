@@ -2,7 +2,7 @@ import headerLogo from "../../../assets/wtwr-logo.png";
 import avatar from "../../../assets/avatar.png";
 import "./Header.css";
 
-export default function Header({ weatherData }) {
+export default function Header({ weatherData, handleButtonClick, modal }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -17,7 +17,12 @@ export default function Header({ weatherData }) {
         </p>
       </div>
       <div className="header__container">
-        <button className="header__add-button">+ Add clothes</button>
+        <button
+          className="header__add-button"
+          onClick={() => handleButtonClick(modal)}
+        >
+          + Add clothes
+        </button>
         <p className="header__username">Terrence Tegegne</p>
         <img className="header__avatar" src={avatar} />
       </div>

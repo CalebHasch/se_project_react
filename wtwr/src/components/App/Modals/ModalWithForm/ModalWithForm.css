@@ -1,6 +1,6 @@
 .form {
   width: 436px;
-  max-height: 496px;
+  max-height: 452px;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -21,20 +21,17 @@
   cursor: pointer;
 }
 
-.form__title {
-  margin: 28px 0 24px 28px;
-}
-
 .form__set {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.21;
-  margin: 0 28px 48px;
+  margin: 0 28px 32px;
   border: none;
   display: flex;
   flex-direction: column;
-  gap: 29px;
+  gap: 24px;
   padding: 0;
+}
+
+.form__title {
+  margin: 28px 0 0;
 }
 
 .form__field {
@@ -65,26 +62,51 @@
   line-height: 1.21;
 }
 
+.form__multiple-choice {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__subtitle {
+  margin: 0 0 4px;
+}
+
+.form__radio-field {
+  margin-top: 8px;
+}
+
+.form__radio-input {
+  margin-right: 8px;
+  opacity: 0.5;
+}
+
+.form__radio-input:checked {
+  opacity: 1;
+  accent-color: black;
+}
+
+.form__radio-input:checked + label {
+  opacity: 1;
+}
+
+.form__radio-label {
+  opacity: 0.5;
+}
+
 .form__submit-button {
-  max-width: 358px;
-  max-height: 50px;
+  width: 124px;
+  height: 36px;
   background-color: black;
   color: white;
-  border-radius: 2px;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.21;
-  margin: 0 36px 36px;
-  padding: 16px 0;
+  border-radius: 4px;
+  margin: 0 28px 36px;
 }
 
 .form__submit-button:hover {
-  opacity: 80%;
+  opacity: 60%;
   cursor: pointer;
 }
 
 .form__submit-button_inactive {
-  background-color: transparent;
-  color: black;
-  opacity: 20%;
+  opacity: 30%;
 }
