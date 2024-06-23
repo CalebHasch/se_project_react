@@ -20,7 +20,7 @@
 .modal__close {
   width: 16px;
   height: 16px;
-  background-image: url(../../assets/closeIcon.png);
+  background-image: url(../assets/closeIcon.png);
   background-color: transparent;
   border: none;
   position: absolute;
@@ -29,5 +29,5 @@
 }
 
 .modal__close_color_white {
-  background-image: url(../../assets/whiteCloseIcon.png);
+  background-image: url(../assets/whiteCloseIcon.png);
 }
