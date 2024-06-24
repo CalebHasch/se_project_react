@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 export default function Header({ weatherData, handleButtonClick, modal }) {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
-  const navigationElement = document.querySelector(".header__navigation");
+  let navigationElement;
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -26,6 +27,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
   }
 
   useEffect(() => {
+    navigationElement = document.querySelector(".header__navigation");
     window.addEventListener("resize", showMenuButton);
   }, [() => window.removeEventListener("resize", showMenuButton)]);
 

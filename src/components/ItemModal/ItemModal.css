@@ -37,3 +37,16 @@
 .card__title:last-of-type {
   margin-top: 12px;
 }
+
+@media screen and (max-width: 755px) {
+  .card {
+    width: 343px;
+    height: 463px;
+    padding-bottom: 40px;
+  }
+
+  .card__image {
+    height: 343px;
+    width: 343px;
+  }
+}
