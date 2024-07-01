@@ -9,8 +9,12 @@ function fetchWeather(baseUrl) {
 
 function filterWeatherData(data) {
   const obj = {};
+  console.log(data);
   obj.location = data.name;
-  obj.temp = { F: data.main.temp };
+  obj.temp = {
+    F: data.main.temp,
+    C: Math.round(((data.main.temp - 32) * 5) / 9),
+  };
   obj.condition = data.weather[0].main;
   obj.sunStatus = { sunrise: data.sys.sunrise, sunset: data.sys.sunset };
 

@@ -2,6 +2,7 @@ import headerLogo from "../../assets/wtwr-logo.png";
 import avatar from "../../assets/avatar.png";
 import menu from "../../assets/headerMenu.png";
 import "./Header.css";
+import Switch from "../Switch/Switch";
 import { useEffect, useState } from "react";
 
 export default function Header({ weatherData, handleButtonClick, modal }) {
@@ -40,6 +41,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
         </p>
       </div>
       <div className="header__container">
+        <Switch labels={{ first: "F", second: "C" }} switchId={"header"} />
         <button
           className="header__add-button header__add-button_widescreen"
           onClick={() => handleButtonClick(modal)}
