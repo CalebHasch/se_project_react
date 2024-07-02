@@ -1,6 +1,8 @@
+import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Foot";
 import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import {
@@ -70,12 +72,20 @@ function App() {
             handleButtonClick={openModal}
             modal={addGarmetModal}
           />
-          <Main
-            weatherData={weatherData}
-            clothingItems={clothingItems}
-            gaugeTemp={gaugeTemp}
-            handleCardClick={handleCardClick}
-          />
+          <Routes>
+            <Route
+              path="/se_project_react/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  clothingItems={clothingItems}
+                  gaugeTemp={gaugeTemp}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+            <Route path="/se_project_react/profile" element={<Profile />} />
+          </Routes>
           <Footer />
         </div>
         <ModalWithForm

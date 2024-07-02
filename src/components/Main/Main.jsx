@@ -1,5 +1,7 @@
+import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { useEffect, useState } from "react";
 import "./Main.css";
 
@@ -10,6 +12,9 @@ export default function Main({
   handleCardClick,
 }) {
   const [clothes, setClothes] = useState([]);
+  const currentTempUnitContext = React.useContext(
+    CurrentTemperatureUnitContext
+  );
 
   function getWeatherAppropiateClothes(weather, clothes) {
     const appropiateClothes = clothes.filter(
@@ -27,7 +32,12 @@ export default function Main({
     <>
       <WeatherCard weatherData={weatherData} />
       <p className="main__text">
-        Today is {Math.round(weatherData.temp.F)}&deg;F / You may want to wear:
+        Today is{" "}
+        {Math.round(
+          weatherData.temp[currentTempUnitContext.currentTemperatureUnit]
+        )}
+        &deg;{currentTempUnitContext.currentTemperatureUnit} / You may want to
+        wear:
       </p>
       <ul className="main__list">
         {clothes.map((item) => {

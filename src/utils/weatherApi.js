@@ -9,7 +9,6 @@ function fetchWeather(baseUrl) {
 
 function filterWeatherData(data) {
   const obj = {};
-  console.log(data);
   obj.location = data.name;
   obj.temp = {
     F: data.main.temp,

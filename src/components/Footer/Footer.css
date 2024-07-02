@@ -1,4 +1,7 @@
 .footer {
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-weight: 500;
@@ -13,6 +16,6 @@
 
 @media screen and (max-width: 755px) {
   .footer {
-    margin-bottom: 20px;
+    bottom: 20px;
   }
 }

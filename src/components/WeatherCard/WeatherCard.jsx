@@ -1,7 +1,13 @@
+import React from "react";
 import "./WeatherCard.css";
 import { dayBanners, nightBanners } from "../../utils/constants";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 export default function WeatherCard({ weatherData }) {
+  const currentTempUnitContext = React.useContext(
+    CurrentTemperatureUnitContext
+  );
+
   function determineBanner(data) {
     let bannerSet;
 
@@ -30,7 +36,10 @@ export default function WeatherCard({ weatherData }) {
   return (
     <div className="weather-card">
       <p className="weather-card__temp">
-        {Math.round(weatherData.temp.F)}&deg;F
+        {Math.round(
+          weatherData.temp[currentTempUnitContext.currentTemperatureUnit]
+        )}
+        &deg;{currentTempUnitContext.currentTemperatureUnit}
       </p>
       <img
         className="weather-card__img"

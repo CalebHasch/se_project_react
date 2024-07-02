@@ -6,7 +6,9 @@
 }
 
 .page__content {
+  position: relative;
   margin: 0 40px;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 755px) {
