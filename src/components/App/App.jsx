@@ -21,14 +21,12 @@ function App() {
     location: "",
     sunStatus: { sunset: "", sunrise: "" },
   });
-
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
   const [clothingItems] = useState(defaultClothingItems);
-
+  const [appropiateClothes, setAppropiateClothes] = useState([]);
   const [modalClothingItem, setModalClothingItem] = useState({
     name: "",
-    linke: "",
+    link: "",
     weather: "",
   });
 
@@ -39,6 +37,13 @@ function App() {
     title: "Add Garmet",
     buttonText: "Add Garmet",
   };
+
+  function getWeatherAppropiateClothes(weather, clothes) {
+    const appropiateClothes = clothes.filter(
+      (item) => item.weather === weather
+    );
+    setAppropiateClothes(appropiateClothes);
+  }
 
   function openModal(modal) {
     modal.classList.add("modal_opened");
@@ -61,6 +66,12 @@ function App() {
       })
       .catch(console.error());
   }, []);
+
+  useEffect(() => {
+    const weather = gaugeTemp(weatherData.temp.F);
+    getWeatherAppropiateClothes(weather, clothingItems);
+  }, [weatherData]);
+
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
@@ -78,13 +89,20 @@ function App() {
               element={
                 <Main
                   weatherData={weatherData}
-                  clothingItems={clothingItems}
-                  gaugeTemp={gaugeTemp}
+                  clothes={appropiateClothes}
                   handleCardClick={handleCardClick}
                 />
               }
             />
-            <Route path="/se_project_react/profile" element={<Profile />} />
+            <Route
+              path="/se_project_react/profile"
+              element={
+                <Profile
+                  clothes={appropiateClothes}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
           </Routes>
           <Footer />
         </div>

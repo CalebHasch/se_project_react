@@ -2,31 +2,12 @@ import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { useEffect, useState } from "react";
 import "./Main.css";
 
-export default function Main({
-  weatherData,
-  gaugeTemp,
-  clothingItems,
-  handleCardClick,
-}) {
-  const [clothes, setClothes] = useState([]);
+export default function Main({ weatherData, clothes, handleCardClick }) {
   const currentTempUnitContext = React.useContext(
     CurrentTemperatureUnitContext
   );
-
-  function getWeatherAppropiateClothes(weather, clothes) {
-    const appropiateClothes = clothes.filter(
-      (item) => item.weather === weather
-    );
-    setClothes(appropiateClothes);
-  }
-
-  useEffect(() => {
-    const weather = gaugeTemp(weatherData.temp.F);
-    getWeatherAppropiateClothes(weather, clothingItems);
-  }, [weatherData]);
 
   return (
     <>
