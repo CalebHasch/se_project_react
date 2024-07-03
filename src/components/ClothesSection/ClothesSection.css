@@ -1,5 +1,6 @@
 .clothes-section {
   margin: 20px 0 0 116px;
+  width: 100%;
 }
 
 .clothes-section__header {
@@ -19,11 +20,15 @@
   padding: 0;
 }
 
+.clothes-section__button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 .clothes-section__list {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, 328px);
   gap: 20px 20px;
   padding: 0;
-  /* margin: 34px 0 100px; */
 }

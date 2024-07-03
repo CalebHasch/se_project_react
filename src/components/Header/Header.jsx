@@ -3,6 +3,7 @@ import avatar from "../../assets/avatar.png";
 import menu from "../../assets/headerMenu.png";
 import "./Header.css";
 import Switch from "../Switch/Switch";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Header({ weatherData, handleButtonClick, modal }) {
@@ -35,7 +36,9 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
   return (
     <div className="header">
       <div className="header__container">
-        <img className="header__logo" src={headerLogo} alt="WTWR logo" />
+        <Link to="/se_project_react/">
+          <img className="header__logo" src={headerLogo} alt="WTWR logo" />
+        </Link>
         <p className="header__location-time">
           {currentDate}, {weatherData.location}
         </p>
@@ -48,9 +51,11 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
         >
           + Add clothes
         </button>
-        <p className="header__username header__username_widescreen">
-          Terrence Tegegne
-        </p>
+        <Link to="/se_project_react/profile" style={{ textDecoration: "none" }}>
+          <p className="header__username header__username_widescreen">
+            Terrence Tegegne
+          </p>
+        </Link>
         <img
           className="header__avatar header__avatar_widescreen"
           src={avatar}

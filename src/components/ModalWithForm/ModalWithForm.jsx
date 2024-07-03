@@ -5,6 +5,7 @@ export default function ModalWithForm({
   onClose,
   modal,
   formElements,
+  onSubmit,
   children,
 }) {
   return (
@@ -13,6 +14,7 @@ export default function ModalWithForm({
         className="modal__form form"
         id={`${formElements.name}-form`}
         name={formElements.name}
+        onSubmit={onSubmit}
       >
         <button
           className="form__close-button modal__close"
