@@ -2,8 +2,8 @@ import headerLogo from "../../assets/wtwr-logo.png";
 import avatar from "../../assets/avatar.png";
 import menu from "../../assets/headerMenu.png";
 import "./Header.css";
-import Switch from "../Switch/Switch";
-import { Link } from "react-router-dom";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Header({ weatherData, handleButtonClick, modal }) {
@@ -36,28 +36,31 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
   return (
     <div className="header">
       <div className="header__container header__container_left">
-        <Link to="/se_project_react/">
+        <NavLink to="/se_project_react/">
           <img className="header__logo" src={headerLogo} alt="WTWR logo" />
-        </Link>
+        </NavLink>
         <p className="header__location-time">
           {currentDate}, {weatherData.location}
         </p>
       </div>
       <div>
         <div className="header__container header__container_widescreen">
-          <Switch labels={{ first: "F", second: "C" }} switchId={"header"} />
+          <ToggleSwitch
+            labels={{ first: "F", second: "C" }}
+            switchId={"header"}
+          />
           <button
             className="header__add-button"
             onClick={() => handleButtonClick(modal)}
           >
             + Add clothes
           </button>
-          <Link
+          <NavLink
             to="/se_project_react/profile"
             style={{ textDecoration: "none" }}
           >
             <p className="header__username">Terrence Tegegne</p>
-          </Link>
+          </NavLink>
           <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
         </div>
         <div className="header__container">
@@ -78,12 +81,12 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                   onClick={toggleMobileMenu}
                 ></button>
                 <div className="header__user-container">
-                  <Link
+                  <NavLink
                     to="/se_project_react/profile"
                     style={{ textDecoration: "none" }}
                   >
                     <p className="header__username">Terrence Tegegne</p>
-                  </Link>
+                  </NavLink>
                   <img
                     className="header__avatar"
                     src={avatar}
@@ -96,7 +99,10 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 >
                   + Add clothes
                 </button>
-                <Switch labels={{ first: "F", second: "C" }} switchId={"nav"} />
+                <ToggleSwitch
+                  labels={{ first: "F", second: "C" }}
+                  switchId={"nav"}
+                />
               </div>
             )}
           </div>

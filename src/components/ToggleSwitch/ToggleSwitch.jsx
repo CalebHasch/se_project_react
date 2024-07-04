@@ -1,8 +1,8 @@
 import React from "react";
-import "./Switch.css";
+import "./ToggleSwitch.css";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
-const Switch = ({ labels, switchId }) => {
+export default function ToggleSwitch({ labels, switchId }) {
   const currentTempUnitContext = React.useContext(
     CurrentTemperatureUnitContext
   );
@@ -10,7 +10,6 @@ const Switch = ({ labels, switchId }) => {
   const cSwitchTexts = document.querySelectorAll(".switch__text_c");
 
   function toggleSwitchText(arr, isAdded) {
-    console.log(arr);
     if (!isAdded) {
       arr.forEach((item) => item.classList.remove("switch__text_checked"));
     } else {
@@ -48,6 +47,4 @@ const Switch = ({ labels, switchId }) => {
       </label>
     </>
   );
-};
-
-export default Switch;
+}

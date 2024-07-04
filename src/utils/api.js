@@ -31,7 +31,6 @@ function postClothingItem({ name, imageUrl, weather }) {
 }
 
 function deleteClothingItem(itemId) {
-  console.log(itemId);
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: headers,
