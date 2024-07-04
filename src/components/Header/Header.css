@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: column;
   width: 95%;
-  height: 208px;
+  height: 240px;
   position: absolute;
   top: 18px;
   left: 0;
@@ -92,7 +92,7 @@
     align-items: start;
   }
 
-  .header__container:first-of-type {
+  .header__container_left {
     flex-direction: column;
     gap: 32px;
   }
@@ -103,15 +103,7 @@
 }
 
 @media screen and (max-width: 630px) {
-  .header__avatar_widescreen {
-    display: none;
-  }
-
-  .header__username_widescreen {
-    display: none;
-  }
-
-  .header__add-button_widescreen {
+  .header__container_widescreen {
     display: none;
   }
 }

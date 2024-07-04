@@ -71,3 +71,14 @@
 .switch__checkbox:checked + .switch__label:hover .switch__button {
   left: calc(100% - 2px);
 }
+
+@media screen and (max-width: 630px) {
+  .switch__label {
+    margin: 24px auto;
+  }
+
+  .switch__checkbox:checked + .switch__label .switch__button {
+    left: calc(100%);
+    transform: translateX(-100%);
+  }
+}

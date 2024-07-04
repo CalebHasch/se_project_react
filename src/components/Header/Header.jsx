@@ -35,7 +35,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
 
   return (
     <div className="header">
-      <div className="header__container">
+      <div className="header__container header__container_left">
         <Link to="/se_project_react/">
           <img className="header__logo" src={headerLogo} alt="WTWR logo" />
         </Link>
@@ -43,56 +43,63 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
           {currentDate}, {weatherData.location}
         </p>
       </div>
-      <div className="header__container">
-        <Switch labels={{ first: "F", second: "C" }} switchId={"header"} />
-        <button
-          className="header__add-button header__add-button_widescreen"
-          onClick={() => handleButtonClick(modal)}
-        >
-          + Add clothes
-        </button>
-        <Link to="/se_project_react/profile" style={{ textDecoration: "none" }}>
-          <p className="header__username header__username_widescreen">
-            Terrence Tegegne
-          </p>
-        </Link>
-        <img
-          className="header__avatar header__avatar_widescreen"
-          src={avatar}
-          alt="Terrence Tegegne"
-        />
-        <div className="header__navigation">
-          {!isMobileMenuOpened ? (
-            <img
-              className="header__menu"
-              src={menu}
-              alt="menu"
-              onClick={toggleMobileMenu}
-            />
-          ) : (
-            <div className="header__nav-container">
-              <button
-                className="header__close"
-                type="button"
-                aria-label="close"
+      <div>
+        <div className="header__container header__container_widescreen">
+          <Switch labels={{ first: "F", second: "C" }} switchId={"header"} />
+          <button
+            className="header__add-button"
+            onClick={() => handleButtonClick(modal)}
+          >
+            + Add clothes
+          </button>
+          <Link
+            to="/se_project_react/profile"
+            style={{ textDecoration: "none" }}
+          >
+            <p className="header__username">Terrence Tegegne</p>
+          </Link>
+          <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
+        </div>
+        <div className="header__container">
+          <div className="header__navigation">
+            {!isMobileMenuOpened ? (
+              <img
+                className="header__menu"
+                src={menu}
+                alt="menu"
                 onClick={toggleMobileMenu}
-              ></button>
-              <div className="header__user-container">
-                <p className="header__username">Terrence Tegegne</p>
-                <img
-                  className="header__avatar"
-                  src={avatar}
-                  alt="Terrence Tegegne"
-                />
+              />
+            ) : (
+              <div className="header__nav-container">
+                <button
+                  className="header__close"
+                  type="button"
+                  aria-label="close"
+                  onClick={toggleMobileMenu}
+                ></button>
+                <div className="header__user-container">
+                  <Link
+                    to="/se_project_react/profile"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <p className="header__username">Terrence Tegegne</p>
+                  </Link>
+                  <img
+                    className="header__avatar"
+                    src={avatar}
+                    alt="Terrence Tegegne"
+                  />
+                </div>
+                <button
+                  className="header__add-button"
+                  onClick={() => handleButtonClick(modal)}
+                >
+                  + Add clothes
+                </button>
+                <Switch labels={{ first: "F", second: "C" }} switchId={"nav"} />
               </div>
-              <button
-                className="header__add-button"
-                onClick={() => handleButtonClick(modal)}
-              >
-                + Add clothes
-              </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
