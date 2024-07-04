@@ -36,7 +36,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
   return (
     <div className="header">
       <div className="header__container header__container_left">
-        <NavLink to="/se_project_react/">
+        <NavLink to="/">
           <img className="header__logo" src={headerLogo} alt="WTWR logo" />
         </NavLink>
         <p className="header__location-time">
@@ -55,10 +55,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
           >
             + Add clothes
           </button>
-          <NavLink
-            to="/se_project_react/profile"
-            style={{ textDecoration: "none" }}
-          >
+          <NavLink to="/profile" style={{ textDecoration: "none" }}>
             <p className="header__username">Terrence Tegegne</p>
           </NavLink>
           <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
