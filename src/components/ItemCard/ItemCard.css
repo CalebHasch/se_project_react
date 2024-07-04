@@ -3,6 +3,7 @@
   height: 325px;
   width: 328px;
   border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .item-card__name {

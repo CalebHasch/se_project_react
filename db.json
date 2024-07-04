@@ -107,24 +107,6 @@
       "imageUrl": "",
       "weather": "",
       "_id": 18
-    },
-    {
-      "name": "asd",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
-      "weather": "hot",
-      "_id": 19
-    },
-    {
-      "name": "Caleb Hasch",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
-      "weather": "hot",
-      "_id": 20
-    },
-    {
-      "name": "Caleb Hasch",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
-      "weather": "hot",
-      "_id": 21
     }
   ]
 }

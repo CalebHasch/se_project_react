@@ -110,3 +110,18 @@
 .form__submit-button_inactive {
   opacity: 30%;
 }
+
+@media screen and (max-width: 475px) {
+  .form {
+    width: 100%;
+    bottom: 0;
+    top: auto;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .form__submit-button {
+    width: auto;
+    height: 44px;
+    margin-bottom: 27px;
+  }
+}
