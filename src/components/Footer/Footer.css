@@ -1,4 +1,8 @@
 .footer {
+  height: 40px;
+}
+
+.footer__container {
   position: absolute;
   bottom: 24px;
   width: 100%;

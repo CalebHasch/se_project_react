@@ -6,11 +6,16 @@ import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import {
+  getInitialClothes,
+  postClothingItem,
+  deleteClothingItem,
+} from "../../utils/api";
+import {
   fetchWeather,
   filterWeatherData,
   gaugeTemp,
 } from "../../utils/weatherApi";
-import { baseUrl, defaultClothingItems } from "../../utils/constants";
+import { baseUrl } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import "./App.css";
 import { useEffect, useState } from "react";
@@ -22,20 +27,24 @@ function App() {
     sunStatus: { sunset: "", sunrise: "" },
   });
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [appropiateClothes, setAppropiateClothes] = useState([]);
   const [modalClothingItem, setModalClothingItem] = useState({
     name: "",
-    link: "",
+    imageUrl: "",
     weather: "",
   });
 
   const itemModal = document.querySelector("#itemModal");
   const addGarmetModal = document.querySelector("#add-card-modal");
+  let currentModal;
 
   function handleAddItemSubmit(item) {
-    setClothingItems([item, ...clothingItems]);
-    console.log(clothingItems);
+    postClothingItem(item)
+      .then((res) => {
+        setClothingItems([res, ...clothingItems]);
+      })
+      .catch(console.error());
   }
 
   function getWeatherAppropiateClothes(weather, clothes) {
@@ -45,17 +54,38 @@ function App() {
     setAppropiateClothes(appropiateClothes);
   }
 
+  const handleCloseEvent = (e) => {
+    if (e.key == "Escape") {
+      closeModal(currentModal);
+    }
+  };
+
   function openModal(modal) {
+    currentModal = modal;
     modal.classList.add("modal_opened");
+    document.addEventListener("keydown", handleCloseEvent);
   }
 
   function closeModal(modal) {
     modal.classList.remove("modal_opened");
+    document.removeEventListener("keydown", handleCloseEvent);
   }
 
   function handleCardClick(item) {
     openModal(itemModal);
     setModalClothingItem(item);
+  }
+
+  function handleCardDelete() {
+    deleteClothingItem(modalClothingItem._id)
+      .then(
+        setClothingItems(
+          clothingItems.filter((item) => item._id !== modalClothingItem._id)
+        )
+      )
+      .catch(console.error());
+
+    closeModal(itemModal);
   }
 
   useEffect(() => {
@@ -64,6 +94,10 @@ function App() {
         const data = filterWeatherData(res);
         setWeatherData(data);
       })
+      .catch(console.error());
+
+    getInitialClothes()
+      .then((res) => setClothingItems(res))
       .catch(console.error());
   }, []);
 
@@ -118,6 +152,7 @@ function App() {
           clothingItem={modalClothingItem}
           onClose={closeModal}
           modal={itemModal}
+          onDelete={handleCardDelete}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>

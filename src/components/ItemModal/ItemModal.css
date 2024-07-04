@@ -28,14 +28,34 @@
   cursor: pointer;
 }
 
-.card__text {
-  margin: 20px 32px 0;
+.card__container {
+  display: flex;
   font-weight: 700;
   font-size: 20px;
+  justify-content: space-between;
 }
 
-.card__title:last-of-type {
+.card__text {
+  margin: 20px 32px 0;
+}
+
+.card__text:last-of-type {
   margin-top: 12px;
+}
+
+.card__delete-button {
+  width: 101px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  color: #ff4d00;
+  margin: 20px 32px 0 0;
+  padding: 0;
+}
+
+.card__delete-button:hover {
+  cursor: pointer;
+  opacity: 60%;
 }
 
 @media screen and (max-width: 755px) {
