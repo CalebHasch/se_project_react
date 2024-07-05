@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
-import Footer from "../Footer/Foot";
+import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -18,7 +18,7 @@ import {
 import { baseUrl } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -34,17 +34,22 @@ function App() {
     imageUrl: "",
     weather: "",
   });
-
-  const itemModal = document.querySelector("#itemModal");
-  const addGarmetModal = document.querySelector("#add-card-modal");
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
+  const itemModalRef = useRef(null);
+  const addGarmetModalRef = useRef(null);
   let currentModal;
 
-  function handleAddItemSubmit(item) {
+  function handleAddItemSubmit(item, reset) {
+    setIsLoading(true);
     postClothingItem(item)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
+        closeModal(addGarmetModalRef.current);
+        reset();
       })
-      .catch(console.error());
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   }
 
   function getWeatherAppropiateClothes(weather, clothes) {
@@ -54,39 +59,51 @@ function App() {
     setAppropiateClothes(appropiateClothes);
   }
 
-  const handleCloseEvent = (e) => {
-    if (e.key == "Escape") {
-      closeModal(currentModal);
-    }
-  };
-
   function openModal(modal) {
     currentModal = modal;
     modal.classList.add("modal_opened");
-    document.addEventListener("keydown", handleCloseEvent);
   }
 
   function closeModal(modal) {
+    setActiveModal(true);
     modal.classList.remove("modal_opened");
-    document.removeEventListener("keydown", handleCloseEvent);
   }
 
   function handleCardClick(item) {
-    openModal(itemModal);
+    openModal(itemModalRef.current);
     setModalClothingItem(item);
   }
 
   function handleCardDelete() {
+    setIsLoading(true);
     deleteClothingItem(modalClothingItem._id)
-      .then(
+      .then(() => {
         setClothingItems(
           clothingItems.filter((item) => item._id !== modalClothingItem._id)
-        )
-      )
-      .catch(console.error());
-
-    closeModal(itemModal);
+        );
+        closeModal(itemModalRef.current);
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleCloseEvent = (e) => {
+      if (e.key == "Escape") {
+        closeModal(currentModal);
+      }
+    };
+
+    document.addEventListener("keydown", handleCloseEvent);
+
+    return () => {
+      document.removeEventListener("keydown", handleCloseEvent);
+    };
+  }, [activeModal]);
 
   useEffect(() => {
     fetchWeather(baseUrl)
@@ -115,7 +132,7 @@ function App() {
           <Header
             weatherData={weatherData}
             handleButtonClick={openModal}
-            modal={addGarmetModal}
+            modal={addGarmetModalRef.current}
           />
           <Routes>
             <Route
@@ -135,7 +152,7 @@ function App() {
                   clothes={appropiateClothes}
                   handleCardClick={handleCardClick}
                   handleButtonClick={openModal}
-                  modal={addGarmetModal}
+                  modal={addGarmetModalRef.current}
                 />
               }
             />
@@ -143,16 +160,18 @@ function App() {
           <Footer />
         </div>
         <AddItemModal
-          modal={addGarmetModal}
+          modal={addGarmetModalRef}
           onClose={closeModal}
           onAddItem={handleAddItemSubmit}
           clothingItems={clothingItems}
+          isLoading={isLoading}
         />
         <ItemModal
           clothingItem={modalClothingItem}
           onClose={closeModal}
-          modal={itemModal}
+          itemModalRef={itemModalRef}
           onDelete={handleCardDelete}
+          isLoading={isLoading}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>

@@ -8,18 +8,20 @@ function processResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
+function request(url, options) {
+  return fetch(url, options).then(processResponse);
+}
+
 function getInitialClothes() {
-  return fetch(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     headers: headers,
-  })
-    .then(processResponse)
-    .then((res) => {
-      return res;
-    });
+  }).then((res) => {
+    return res;
+  });
 }
 
 function postClothingItem({ name, imageUrl, weather }) {
-  return fetch(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
@@ -27,14 +29,19 @@ function postClothingItem({ name, imageUrl, weather }) {
       imageUrl: imageUrl,
       weather: weather,
     }),
-  }).then(processResponse);
+  });
 }
 
 function deleteClothingItem(itemId) {
-  return fetch(`${baseUrl}/items/${itemId}`, {
+  return request(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: headers,
-  }).then(processResponse);
+  });
 }
 
-export { getInitialClothes, postClothingItem, deleteClothingItem };
+export {
+  getInitialClothes,
+  postClothingItem,
+  deleteClothingItem,
+  processResponse,
+};

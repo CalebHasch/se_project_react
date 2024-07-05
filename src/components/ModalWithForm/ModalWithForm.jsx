@@ -9,7 +9,7 @@ export default function ModalWithForm({
   children,
 }) {
   return (
-    <div className="modal" id={`${formElements.name}-modal`}>
+    <div className="modal" id={`${formElements.name}-modal`} ref={modal}>
       <form
         className="modal__form form"
         id={`${formElements.name}-form`}
@@ -20,8 +20,8 @@ export default function ModalWithForm({
           className="form__close-button modal__close"
           type="button"
           aria-label="close"
-          onClick={() => onClose(modal)}
-        ></button>
+          onClick={() => onClose(modal.current)}
+        />
         <fieldset className="form__set">
           <p className="form__title">{formElements.title}</p>
           {children}

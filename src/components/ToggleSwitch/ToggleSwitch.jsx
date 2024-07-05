@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef } from "react";
 import "./ToggleSwitch.css";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -6,26 +7,19 @@ export default function ToggleSwitch({ labels, switchId }) {
   const currentTempUnitContext = React.useContext(
     CurrentTemperatureUnitContext
   );
-  const fSwitchTexts = document.querySelectorAll(".switch__text_f");
-  const cSwitchTexts = document.querySelectorAll(".switch__text_c");
 
-  function toggleSwitchText(arr, isAdded) {
-    if (!isAdded) {
-      arr.forEach((item) => item.classList.remove("switch__text_checked"));
-    } else {
-      arr.forEach((item) => item.classList.add("switch__text_checked"));
-    }
-  }
+  const fSwitchTextsRef = useRef(null);
+  const cSwitchTextsRef = useRef(null);
 
   function toggleSwitch() {
     if (currentTempUnitContext.currentTemperatureUnit === "F") {
       currentTempUnitContext.setCurrentTemperatureUnit("C");
-      toggleSwitchText(cSwitchTexts, true);
-      toggleSwitchText(fSwitchTexts, false);
+      fSwitchTextsRef.current.classList.remove("switch__text_checked");
+      cSwitchTextsRef.current.classList.add("switch__text_checked");
     } else {
       currentTempUnitContext.setCurrentTemperatureUnit("F");
-      toggleSwitchText(fSwitchTexts, true);
-      toggleSwitchText(cSwitchTexts, false);
+      fSwitchTextsRef.current.classList.add("switch__text_checked");
+      cSwitchTextsRef.current.classList.remove("switch__text_checked");
     }
   }
 
@@ -39,11 +33,16 @@ export default function ToggleSwitch({ labels, switchId }) {
         type="checkbox"
       />
       <label className="switch__label " htmlFor={`${switchId}-switch`}>
-        <p className="switch__text switch__text_checked switch__text_f">
+        <p
+          className="switch__text switch__text_checked switch__text_f"
+          ref={fSwitchTextsRef}
+        >
           {labels.first}
         </p>
         <span className={`switch__button`} />
-        <p className="switch__text switch__text_c">{labels.second}</p>
+        <p className="switch__text switch__text_c" ref={cSwitchTextsRef}>
+          {labels.second}
+        </p>
       </label>
     </>
   );

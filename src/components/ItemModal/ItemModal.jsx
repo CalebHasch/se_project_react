@@ -1,15 +1,21 @@
 import "../Modal.css";
 import "./ItemModal.css";
 
-export default function ItemModal({ onClose, clothingItem, modal, onDelete }) {
+export default function ItemModal({
+  onClose,
+  clothingItem,
+  itemModalRef,
+  onDelete,
+  isLoading,
+}) {
   return (
-    <div className="modal" id="itemModal">
+    <div className="modal" id="itemModal" ref={itemModalRef}>
       <div className="modal__card card">
         <button
           className="card__close-button modal__close modal__close_color_white"
           type="button"
           aria-label="close"
-          onClick={() => onClose(modal)}
+          onClick={() => onClose(itemModalRef.current)}
         ></button>
         <img
           className="card__image"
@@ -27,7 +33,7 @@ export default function ItemModal({ onClose, clothingItem, modal, onDelete }) {
             aria-label="delete"
             onClick={onDelete}
           >
-            Delete item
+            {isLoading ? "Deleting..." : "Delete item"}
           </button>
         </div>
       </div>

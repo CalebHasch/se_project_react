@@ -1,10 +1,7 @@
+import { processResponse } from "./api";
+
 function fetchWeather(baseUrl) {
-  return fetch(`${baseUrl}`, {}).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  });
+  return fetch(`${baseUrl}`, {}).then(processResponse);
 }
 
 function filterWeatherData(data) {

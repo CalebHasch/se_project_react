@@ -4,12 +4,11 @@ import menu from "../../assets/headerMenu.png";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Header({ weatherData, handleButtonClick, modal }) {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
-
-  let navigationElement;
+  const navigationRef = useRef(null);
 
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -22,16 +21,18 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
 
   function showMenuButton() {
     if (window.innerWidth <= 630) {
-      navigationElement.classList.add("header__navigation_shown");
+      navigationRef.current.classList.add("header__navigation_shown");
     } else {
-      navigationElement.classList.remove("header__navigation_shown");
+      navigationRef.current.classList.remove("header__navigation_shown");
     }
   }
 
   useEffect(() => {
-    navigationElement = document.querySelector(".header__navigation");
+    showMenuButton();
     window.addEventListener("resize", showMenuButton);
-  }, [() => window.removeEventListener("resize", showMenuButton)]);
+
+    return () => window.removeEventListener("resize", showMenuButton);
+  }, []);
 
   return (
     <div className="header">
@@ -61,7 +62,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
           <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
         </div>
         <div className="header__container">
-          <div className="header__navigation">
+          <div className="header__navigation" ref={navigationRef}>
             {!isMobileMenuOpened ? (
               <img
                 className="header__menu"
@@ -78,10 +79,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                   onClick={toggleMobileMenu}
                 ></button>
                 <div className="header__user-container">
-                  <NavLink
-                    to="/se_project_react/profile"
-                    style={{ textDecoration: "none" }}
-                  >
+                  <NavLink to="/profile" style={{ textDecoration: "none" }}>
                     <p className="header__username">Terrence Tegegne</p>
                   </NavLink>
                   <img
