@@ -149,7 +149,7 @@ function App() {
               path="/profile"
               element={
                 <Profile
-                  clothes={appropiateClothes}
+                  clothes={clothingItems}
                   handleCardClick={handleCardClick}
                   handleButtonClick={openModal}
                   modal={addGarmetModalRef.current}

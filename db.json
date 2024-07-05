@@ -103,10 +103,10 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
     },
     {
-      "name": "Caleb Haschxd",
-      "imageUrl": "",
-      "weather": "",
-      "_id": 18
+      "name": "Eden's dress code",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+      "weather": "hot",
+      "_id": 17
     }
   ]
 }
