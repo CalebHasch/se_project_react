@@ -3,19 +3,19 @@ import "./ItemModal.css";
 
 export default function ItemModal({
   onClose,
+  isOpen,
   clothingItem,
-  itemModalRef,
   onDelete,
   isLoading,
 }) {
   return (
-    <div className="modal" id="itemModal" ref={itemModalRef}>
+    <div className={`modal ${isOpen && "modal_opened"}`} id="itemModal">
       <div className="modal__card card">
         <button
           className="card__close-button modal__close modal__close_color_white"
           type="button"
           aria-label="close"
-          onClick={() => onClose(itemModalRef.current)}
+          onClick={() => onClose()}
         ></button>
         <img
           className="card__image"

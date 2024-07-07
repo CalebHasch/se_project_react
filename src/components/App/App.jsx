@@ -18,7 +18,7 @@ import {
 import { baseUrl } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import "./App.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -35,17 +35,14 @@ function App() {
     weather: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [activeModal, setActiveModal] = useState(false);
-  const itemModalRef = useRef(null);
-  const addGarmetModalRef = useRef(null);
-  let currentModal;
+  const [activeModal, setActiveModal] = useState("");
 
   function handleAddItemSubmit(item, reset) {
     setIsLoading(true);
     postClothingItem(item)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
-        closeModal(addGarmetModalRef.current);
+        closeModal();
         reset();
       })
       .catch(console.error)
@@ -60,17 +57,15 @@ function App() {
   }
 
   function openModal(modal) {
-    currentModal = modal;
-    modal.classList.add("modal_opened");
+    setActiveModal(modal);
   }
 
-  function closeModal(modal) {
-    setActiveModal(true);
-    modal.classList.remove("modal_opened");
+  function closeModal() {
+    setActiveModal("");
   }
 
   function handleCardClick(item) {
-    openModal(itemModalRef.current);
+    openModal("item-modal");
     setModalClothingItem(item);
   }
 
@@ -81,7 +76,7 @@ function App() {
         setClothingItems(
           clothingItems.filter((item) => item._id !== modalClothingItem._id)
         );
-        closeModal(itemModalRef.current);
+        closeModal();
       })
       .catch(console.error)
       .finally(() => {
@@ -94,7 +89,7 @@ function App() {
 
     const handleCloseEvent = (e) => {
       if (e.key == "Escape") {
-        closeModal(currentModal);
+        closeModal();
       }
     };
 
@@ -111,11 +106,11 @@ function App() {
         const data = filterWeatherData(res);
         setWeatherData(data);
       })
-      .catch(console.error());
+      .catch(console.error);
 
     getInitialClothes()
       .then((res) => setClothingItems(res))
-      .catch(console.error());
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -132,7 +127,7 @@ function App() {
           <Header
             weatherData={weatherData}
             handleButtonClick={openModal}
-            modal={addGarmetModalRef.current}
+            modal={"add-garment"}
           />
           <Routes>
             <Route
@@ -152,7 +147,7 @@ function App() {
                   clothes={clothingItems}
                   handleCardClick={handleCardClick}
                   handleButtonClick={openModal}
-                  modal={addGarmetModalRef.current}
+                  modal={"add-garment"}
                 />
               }
             />
@@ -160,8 +155,8 @@ function App() {
           <Footer />
         </div>
         <AddItemModal
-          modal={addGarmetModalRef}
           onClose={closeModal}
+          isOpen={activeModal === "add-garment"}
           onAddItem={handleAddItemSubmit}
           clothingItems={clothingItems}
           isLoading={isLoading}
@@ -169,7 +164,7 @@ function App() {
         <ItemModal
           clothingItem={modalClothingItem}
           onClose={closeModal}
-          itemModalRef={itemModalRef}
+          isOpen={activeModal === "item-modal"}
           onDelete={handleCardDelete}
           isLoading={isLoading}
         />

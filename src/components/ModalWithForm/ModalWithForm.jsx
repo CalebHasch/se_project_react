@@ -3,13 +3,16 @@ import "../Modal.css";
 
 export default function ModalWithForm({
   onClose,
-  modal,
+  isOpen,
   formElements,
   onSubmit,
   children,
 }) {
   return (
-    <div className="modal" id={`${formElements.name}-modal`} ref={modal}>
+    <div
+      className={`modal ${isOpen && "modal_opened"} `}
+      id={`${formElements.name}-modal`}
+    >
       <form
         className="modal__form form"
         id={`${formElements.name}-form`}
@@ -20,7 +23,7 @@ export default function ModalWithForm({
           className="form__close-button modal__close"
           type="button"
           aria-label="close"
-          onClick={() => onClose(modal.current)}
+          onClick={() => onClose()}
         />
         <fieldset className="form__set">
           <p className="form__title">{formElements.title}</p>
