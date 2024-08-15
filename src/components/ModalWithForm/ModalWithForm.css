@@ -1,6 +1,6 @@
 .form {
   width: 436px;
-  max-height: 452px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   position: fixed;

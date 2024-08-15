@@ -1,10 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import RegistrationModal from "../RegistrationModal/RegistrationModal";
 import {
   getInitialClothes,
   postClothingItem,
@@ -19,8 +20,12 @@ import { baseUrl } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import "./App.css";
 import { useEffect, useState } from "react";
+import LoginModal from "../LoginModal/LoginModal";
+import * as auth from "../../utils/auth";
 
 function App() {
+  const [userData, setUserData] = useState({ username: "", email: "" });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weatherData, setWeatherData] = useState({
     temp: { F: "999", C: "999" },
     location: "",
@@ -35,7 +40,16 @@ function App() {
     weather: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState("registration");
+
+  function handleRegistration({ name, email, password, avatarUrl }) {
+    auth
+      .register(name, password, email, avatarUrl)
+      .then(() => {
+        Navigate("/login");
+      })
+      .catch(console.error);
+  }
 
   function handleAddItemSubmit(item, reset) {
     setIsLoading(true);
@@ -166,6 +180,17 @@ function App() {
           onClose={closeModal}
           isOpen={activeModal === "item-modal"}
           onDelete={handleCardDelete}
+          isLoading={isLoading}
+        />
+        <RegistrationModal
+          onClose={closeModal}
+          isOpen={activeModal === "registration"}
+          onRegister={handleRegistration}
+          isLoading={isLoading}
+        />
+        <LoginModal
+          onClose={closeModal}
+          isOpen={activeModal === "login"}
           isLoading={isLoading}
         />
       </CurrentTemperatureUnitContext.Provider>
