@@ -29,7 +29,7 @@ export default function RegistrationModal({
         email: emailValue,
         password: passwordValue,
         name: nameValue,
-        avatarUrl: avatarUrlValue,
+        avatar: avatarUrlValue,
       },
       handleReset
     );

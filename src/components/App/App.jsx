@@ -6,6 +6,7 @@ import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
+import ProtectedRoute from "../ProtectedRoute";
 import {
   getInitialClothes,
   postClothingItem,
@@ -22,9 +23,10 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import LoginModal from "../LoginModal/LoginModal";
 import * as auth from "../../utils/auth";
+import AppContext from "../../contexts/AppContext";
 
 function App() {
-  const [userData, setUserData] = useState({ username: "", email: "" });
+  // const [userData, setUserData] = useState({ username: "", email: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weatherData, setWeatherData] = useState({
     temp: { F: "999", C: "999" },
@@ -40,13 +42,24 @@ function App() {
     weather: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [activeModal, setActiveModal] = useState("registration");
+  const [activeModal, setActiveModal] = useState("login");
 
-  function handleRegistration({ name, email, password, avatarUrl }) {
+  function handleRegistration({ name, email, password, avatar }) {
     auth
-      .register(name, password, email, avatarUrl)
+      .register(name, email, password, avatar)
       .then(() => {
-        Navigate("/login");
+        openModal("login");
+      })
+      .catch(console.error);
+  }
+
+  function handleLogin({ email, password }) {
+    auth
+      .login(email, password)
+      .then(() => {
+        console.log("login");
+        closeModal();
+        setIsLoggedIn(true);
       })
       .catch(console.error);
   }
@@ -191,6 +204,7 @@ function App() {
         <LoginModal
           onClose={closeModal}
           isOpen={activeModal === "login"}
+          onLogin={handleLogin}
           isLoading={isLoading}
         />
       </CurrentTemperatureUnitContext.Provider>

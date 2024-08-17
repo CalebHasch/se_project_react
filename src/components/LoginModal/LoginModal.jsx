@@ -1,11 +1,9 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export default function LoginModal({ onClose, isOpen, onAddItem, isLoading }) {
+export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
-  const [avatarUrlValue, setAvatarUrlValue] = useState("");
 
   const formElements = {
     name: "login",
@@ -19,12 +17,10 @@ export default function LoginModal({ onClose, isOpen, onAddItem, isLoading }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAddItem(
+    onLogin(
       {
         email: emailValue,
         password: passwordValue,
-        name: nameValue,
-        avatarUrl: avatarUrlValue,
       },
       handleReset
     );
@@ -33,8 +29,6 @@ export default function LoginModal({ onClose, isOpen, onAddItem, isLoading }) {
   function handleReset() {
     setEmailValue("");
     setPasswordValue("");
-    setAvatarUrlValue("");
-    setNameValue("");
   }
   return (
     <ModalWithForm
