@@ -1,7 +1,6 @@
 export const BASE_URL = "http://127.0.0.1:3001";
 
 export const register = (name, email, password, avatar) => {
-  console.log({ name, email, password, avatar });
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
@@ -15,7 +14,6 @@ export const register = (name, email, password, avatar) => {
 };
 
 export const login = (email, password) => {
-  console.log({ email, password });
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
@@ -23,6 +21,20 @@ export const login = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  });
+};
+
+export const getUser = (token) => {
+  console.log(token);
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
