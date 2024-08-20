@@ -32,6 +32,14 @@
   opacity: 0.6;
 }
 
+.header__signup {
+  margin-right: 20px;
+}
+
+.header__signup_column {
+  margin-top: 20px;
+}
+
 .header__username {
   line-height: 1.24;
   margin: 0 12px 0 20px;
@@ -41,6 +49,13 @@
 .header__avatar {
   width: 40px;
   height: 40px;
+}
+
+.header__avatar_empty {
+  border-radius: 50%;
+  border: 1px solid black;
+  line-height: 40px;
+  text-align: center;
 }
 
 .header__navigation {

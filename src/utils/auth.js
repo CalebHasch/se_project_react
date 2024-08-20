@@ -27,7 +27,6 @@ export const login = (email, password) => {
 };
 
 export const getUser = (token) => {
-  console.log(token);
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {

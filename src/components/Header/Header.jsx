@@ -1,14 +1,18 @@
+import { useEffect, useState, useRef, useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import headerLogo from "../../assets/wtwr-logo.png";
 import avatar from "../../assets/avatar.png";
 import menu from "../../assets/headerMenu.png";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
 
 export default function Header({ weatherData, handleButtonClick, modal }) {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const navigationRef = useRef(null);
+  const user = useContext(CurrentUserContext);
+  console.log(user.data.name.split(""));
+  const userInitial = user.data.name.split("")[0].toUpperCase();
 
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -50,16 +54,45 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
             labels={{ first: "F", second: "C" }}
             switchId={"header"}
           />
-          <button
-            className="header__add-button"
-            onClick={() => handleButtonClick(modal)}
-          >
-            + Add clothes
-          </button>
-          <NavLink to="/profile" style={{ textDecoration: "none" }}>
-            <p className="header__username">Terrence Tegegne</p>
-          </NavLink>
-          <img className="header__avatar" src={avatar} alt="Terrence Tegegne" />
+          {!user ? (
+            <div className="header__container">
+              <button
+                className="header__add-button header__signup"
+                onClick={() => handleButtonClick("registration")}
+              >
+                Sign Up
+              </button>
+              <button
+                className="header__add-button"
+                onClick={() => handleButtonClick("login")}
+              >
+                Login
+              </button>
+            </div>
+          ) : (
+            <div className="header__container">
+              <button
+                className="header__add-button"
+                onClick={() => handleButtonClick(modal)}
+              >
+                + Add clothes
+              </button>
+              <NavLink to="/profile" style={{ textDecoration: "none" }}>
+                <p className="header__username">{user.data.name}</p>
+              </NavLink>
+              {!user.data.avatar ? (
+                <img
+                  className="header__avatar"
+                  src={avatar}
+                  alt={user.data.name}
+                />
+              ) : (
+                <span className="header__avatar header__avatar_empty">
+                  {userInitial}
+                </span>
+              )}
+            </div>
+          )}
         </div>
         <div className="header__container">
           <div className="header__navigation" ref={navigationRef}>
@@ -70,6 +103,31 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 alt="menu"
                 onClick={toggleMobileMenu}
               />
+            ) : user ? (
+              <div className="header__nav-container">
+                <button
+                  className="header__close"
+                  type="button"
+                  aria-label="close"
+                  onClick={toggleMobileMenu}
+                ></button>
+                <button
+                  className="header__add-button header__signup_column"
+                  onClick={() => handleButtonClick("registration")}
+                >
+                  Sign Up
+                </button>
+                <button
+                  className="header__add-button header__signup_column"
+                  onClick={() => handleButtonClick("login")}
+                >
+                  Login
+                </button>
+                <ToggleSwitch
+                  labels={{ first: "F", second: "C" }}
+                  switchId={"nav"}
+                />
+              </div>
             ) : (
               <div className="header__nav-container">
                 <button
@@ -80,12 +138,12 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 ></button>
                 <div className="header__user-container">
                   <NavLink to="/profile" style={{ textDecoration: "none" }}>
-                    <p className="header__username">Terrence Tegegne</p>
+                    <p className="header__username">{user.data.name}</p>
                   </NavLink>
                   <img
                     className="header__avatar"
                     src={avatar}
-                    alt="Terrence Tegegne"
+                    alt={user.data.name}
                   />
                 </div>
                 <button
