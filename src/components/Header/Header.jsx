@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import headerLogo from "../../assets/wtwr-logo.png";
-import avatar from "../../assets/avatar.png";
 import menu from "../../assets/headerMenu.png";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
@@ -11,8 +10,6 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const navigationRef = useRef(null);
   const user = useContext(CurrentUserContext);
-  console.log(user.data.name.split(""));
-  const userInitial = user.data.name.split("")[0].toUpperCase();
 
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -80,15 +77,15 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
               <NavLink to="/profile" style={{ textDecoration: "none" }}>
                 <p className="header__username">{user.data.name}</p>
               </NavLink>
-              {!user.data.avatar ? (
+              {user.data.avatar ? (
                 <img
                   className="header__avatar"
-                  src={avatar}
+                  src={user.data.avatar}
                   alt={user.data.name}
                 />
               ) : (
                 <span className="header__avatar header__avatar_empty">
-                  {userInitial}
+                  {user.data.name.split("")[0].toUpperCase()}
                 </span>
               )}
             </div>
@@ -103,7 +100,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 alt="menu"
                 onClick={toggleMobileMenu}
               />
-            ) : user ? (
+            ) : !user ? (
               <div className="header__nav-container">
                 <button
                   className="header__close"
@@ -140,11 +137,17 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                   <NavLink to="/profile" style={{ textDecoration: "none" }}>
                     <p className="header__username">{user.data.name}</p>
                   </NavLink>
-                  <img
-                    className="header__avatar"
-                    src={avatar}
-                    alt={user.data.name}
-                  />
+                  {user.data.avatar ? (
+                    <img
+                      className="header__avatar"
+                      src={user.data.avatar}
+                      alt={user.data.name}
+                    />
+                  ) : (
+                    <span className="header__avatar header__avatar_empty">
+                      {user.data.name.split("")[0].toUpperCase()}
+                    </span>
+                  )}
                 </div>
                 <button
                   className="header__add-button"
