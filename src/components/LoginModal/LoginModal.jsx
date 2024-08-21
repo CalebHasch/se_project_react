@@ -9,6 +9,8 @@ export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
     name: "login",
     title: "Log In",
     buttonText: isLoading ? "Logging In..." : "Log In",
+    linkText: "or Register",
+    modal: "registration",
   };
 
   function handleChange(e, setter) {

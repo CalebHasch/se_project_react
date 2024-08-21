@@ -93,13 +93,18 @@
   opacity: 0.5;
 }
 
+.form__container {
+  display: flex;
+  margin: 0 0 36px 28px;
+}
+
 .form__submit-button {
   width: 124px;
   height: 36px;
   background-color: black;
   color: white;
   border-radius: 4px;
-  margin: 0 28px 36px;
+  margin: 0;
 }
 
 .form__submit-button:hover {
@@ -109,6 +114,16 @@
 
 .form__submit-button_inactive {
   opacity: 30%;
+}
+
+.form__link {
+  opacity: 50%;
+  margin: auto 0 auto 12px;
+}
+
+.form__link:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 
 @media screen and (max-width: 475px) {

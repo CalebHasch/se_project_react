@@ -17,6 +17,7 @@ export default function RegistrationModal({
     title: "Sign Up",
     buttonText: isLoading ? "Creating..." : "Next",
     linkText: "or Log in",
+    modal: "login",
   };
 
   function handleChange(e, setter) {

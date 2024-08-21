@@ -7,6 +7,7 @@ export default function Profile({
   handleCardClick,
   handleButtonClick,
   handleLogout,
+  handleCardLike,
   modal,
 }) {
   return (
@@ -16,6 +17,7 @@ export default function Profile({
         clothes={clothes}
         handleCardClick={handleCardClick}
         handleButtonClick={handleButtonClick}
+        handleCardLike={handleCardLike}
         modal={modal}
       />
     </div>

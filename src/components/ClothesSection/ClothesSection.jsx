@@ -7,6 +7,7 @@ export default function ClothesSection({
   clothes,
   handleCardClick,
   handleButtonClick,
+  handleCardLike,
   modal,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -27,7 +28,11 @@ export default function ClothesSection({
           return (
             item.owner === currentUser._id && (
               <li key={item._id}>
-                <ItemCard clothes={item} handleCardClick={handleCardClick} />
+                <ItemCard
+                  clothes={item}
+                  handleCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                />
               </li>
             )
           );

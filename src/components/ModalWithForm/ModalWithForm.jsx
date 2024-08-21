@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ActiveModalContext } from "../../contexts/ActiveModalContext";
 import "./ModalWithForm.css";
 import "../Modal.css";
 
@@ -8,6 +10,12 @@ export default function ModalWithForm({
   onSubmit,
   children,
 }) {
+  const setActiveModal = useContext(ActiveModalContext);
+
+  function changeModal() {
+    setActiveModal(formElements.modal);
+  }
+
   return (
     <div
       className={`modal ${isOpen && "modal_opened"} `}
@@ -29,14 +37,20 @@ export default function ModalWithForm({
           <p className="form__title">{formElements.title}</p>
           {children}
         </fieldset>
-        <button
-          type="submit"
-          className="form__submit-button form__submit-button_inactiv"
-          // disabled
-        >
-          {formElements.buttonText}
-        </button>
-        {formElements.linkText && <p>{formElements.linkText}</p>}
+        <div className="form__container">
+          <button
+            type="submit"
+            className="form__submit-button form__submit-button_inactiv"
+            // disabled
+          >
+            {formElements.buttonText}
+          </button>
+          {formElements.linkText && (
+            <p className="form__link" onClick={changeModal}>
+              {formElements.linkText}
+            </p>
+          )}
+        </div>
       </form>
     </div>
   );
