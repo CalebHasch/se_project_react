@@ -10,7 +10,7 @@ export default function Profile({
 }) {
   return (
     <div className="profile">
-      <SideBar />
+      <SideBar onOpen={handleButtonClick} />
       <ClothesSection
         clothes={clothes}
         handleCardClick={handleCardClick}

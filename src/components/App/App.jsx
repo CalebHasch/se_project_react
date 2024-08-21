@@ -6,6 +6,7 @@ import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ProtectedRoute from "../ProtectedRoute";
 import {
   getInitialClothes,
@@ -224,6 +225,12 @@ function App() {
               onClose={closeModal}
               isOpen={activeModal === "registration"}
               onRegister={handleRegistration}
+              isLoading={isLoading}
+            />
+            <EditProfileModal
+              onClose={closeModal}
+              isOpen={activeModal === "edit-profile"}
+              onUpdate={handleCardClick}
               isLoading={isLoading}
             />
             <LoginModal

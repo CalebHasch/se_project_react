@@ -46,6 +46,10 @@ function deleteClothingItem(itemId) {
   });
 }
 
+function EditUser({ name, avatar }) {
+  return request(`${baseUrl}/user/me`);
+}
+
 export {
   getInitialClothes,
   postClothingItem,
