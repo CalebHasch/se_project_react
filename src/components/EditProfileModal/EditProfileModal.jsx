@@ -30,6 +30,13 @@ export default function EditProfileModal({
     });
   }
 
+  useEffect(() => {
+    if (user) {
+      setNameValue(user.name || "");
+      setAvatarUrlValue(user.avatar || "");
+    }
+  }, [user]);
+
   return (
     <ModalWithForm
       onClose={onClose}

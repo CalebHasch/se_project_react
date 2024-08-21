@@ -1,6 +1,6 @@
 import "../Modal.css";
 import "./ItemModal.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export default function ItemModal({
@@ -11,11 +11,15 @@ export default function ItemModal({
   isLoading,
 }) {
   const currentUser = useContext(CurrentUserContext);
-  let isOwn;
-  if (currentUser) {
-    isOwn = clothingItem.owner === currentUser._id;
-  }
+  const [isOwn, setIsOwn] = useState(false);
+
   const cardDeleteButtonClassName = `card__delete-button ${isOwn ? "card__delete-button_visible" : "card__delete-button_hidden"}`;
+
+  useEffect(() => {
+    if (currentUser) {
+      setIsOwn(clothingItem.owner === currentUser._id);
+    }
+  }, [currentUser, clothingItem]);
 
   return (
     <div className={`modal ${isOpen && "modal_opened"}`} id="itemModal">

@@ -6,15 +6,40 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.item-card__name {
+.item-card__container {
+  display: flex;
   position: relative;
   top: 15px;
-  text-align: center;
+  z-index: 1;
+}
+
+.item-card__name {
   background-color: white;
+  margin: 0 0 0 auto;
   width: max-content;
   padding: 0 12px;
-  margin: 0 auto;
   z-index: 1;
+}
+
+.item-card__like-icon {
+  background-image: url("../../assets/like-icon-inactive.png");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 15px;
+  width: 18px;
+  margin: auto auto auto 10px;
+  border: none;
+  z-index: 1;
+}
+
+.item-card__like-icon:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.item-card__like-icon_active {
+  background-image: url("../../assets/like-icon-active.png");
 }
 
 .item-card__img {

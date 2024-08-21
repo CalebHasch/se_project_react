@@ -36,6 +36,7 @@ export default function ModalWithForm({
         >
           {formElements.buttonText}
         </button>
+        {formElements.linkText && <p>{formElements.linkText}</p>}
       </form>
     </div>
   );

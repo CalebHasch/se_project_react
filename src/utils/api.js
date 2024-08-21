@@ -46,13 +46,37 @@ function deleteClothingItem(itemId) {
   });
 }
 
-function EditUser({ name, avatar }) {
-  return request(`${baseUrl}/user/me`);
+function addCardLike(itemId) {
+  return request(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: headers,
+  });
+}
+
+function removeCardLike(itemId) {
+  return request(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: headers,
+  });
+}
+
+function editUser({ name, avatar }) {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      name: name,
+      avatar: avatar,
+    }),
+  });
 }
 
 export {
+  processResponse,
   getInitialClothes,
   postClothingItem,
   deleteClothingItem,
-  processResponse,
+  addCardLike,
+  removeCardLike,
+  editUser,
 };
