@@ -1,5 +1,10 @@
-const baseUrl = "http://127.0.0.1:3001/";
-const headers = { "Content-Type": "application/json" };
+import { getToken } from "./token";
+const token = getToken();
+const baseUrl = "http://127.0.0.1:3001";
+const headers = {
+  "Content-Type": "application/json",
+  authorization: `Bearer ${token}`,
+};
 
 function processResponse(res) {
   if (res.ok) {
@@ -14,7 +19,9 @@ function request(url, options) {
 
 function getInitialClothes() {
   return request(`${baseUrl}/items`, {
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((res) => {
     return res;
   });

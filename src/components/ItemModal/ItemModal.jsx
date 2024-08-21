@@ -1,5 +1,7 @@
 import "../Modal.css";
 import "./ItemModal.css";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export default function ItemModal({
   onClose,
@@ -8,6 +10,13 @@ export default function ItemModal({
   onDelete,
   isLoading,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+  let isOwn;
+  if (currentUser) {
+    isOwn = clothingItem.owner === currentUser._id;
+  }
+  const cardDeleteButtonClassName = `card__delete-button ${isOwn ? "card__delete-button_visible" : "card__delete-button_hidden"}`;
+
   return (
     <div className={`modal ${isOpen && "modal_opened"}`} id="itemModal">
       <div className="modal__card card">
@@ -28,7 +37,7 @@ export default function ItemModal({
             <p className="card__text">Weather: {clothingItem.weather}</p>
           </div>
           <button
-            className="card__delete-button"
+            className={cardDeleteButtonClassName}
             type="button"
             aria-label="delete"
             onClick={onDelete}

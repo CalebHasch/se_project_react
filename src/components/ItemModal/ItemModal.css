@@ -59,6 +59,14 @@
   opacity: 60%;
 }
 
+.card__delete-button_hidden {
+  display: none;
+}
+
+.card__delete-button_visable {
+  display: inline;
+}
+
 @media screen and (max-width: 755px) {
   .card {
     width: 343px;

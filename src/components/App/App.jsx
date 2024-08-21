@@ -144,16 +144,17 @@ function App() {
       .catch(console.error);
 
     getInitialClothes()
-      .then((res) => setClothingItems(res))
+      .then((res) => {
+        setClothingItems(res.data);
+      })
       .catch(console.error);
 
     if (jwt) {
       auth
         .getUser(jwt)
         .then((data) => {
-          console.log(data.data);
           setIsLoggedIn(true);
-          setCurrentUser(data);
+          setCurrentUser(data.data);
           closeModal();
         })
         .catch(console.error);

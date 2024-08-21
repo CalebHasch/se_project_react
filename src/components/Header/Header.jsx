@@ -75,17 +75,17 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 + Add clothes
               </button>
               <NavLink to="/profile" style={{ textDecoration: "none" }}>
-                <p className="header__username">{user.data.name}</p>
+                <p className="header__username">{user.name}</p>
               </NavLink>
-              {user.data.avatar ? (
+              {user.avatar ? (
                 <img
                   className="header__avatar"
-                  src={user.data.avatar}
-                  alt={user.data.name}
+                  src={user.avatar}
+                  alt={user.name}
                 />
               ) : (
                 <span className="header__avatar header__avatar_empty">
-                  {user.data.name.split("")[0].toUpperCase()}
+                  {user.name.split("")[0].toUpperCase()}
                 </span>
               )}
             </div>
@@ -135,17 +135,17 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 ></button>
                 <div className="header__user-container">
                   <NavLink to="/profile" style={{ textDecoration: "none" }}>
-                    <p className="header__username">{user.data.name}</p>
+                    <p className="header__username">{user.name}</p>
                   </NavLink>
-                  {user.data.avatar ? (
+                  {user.avatar ? (
                     <img
                       className="header__avatar"
-                      src={user.data.avatar}
-                      alt={user.data.name}
+                      src={user.avatar}
+                      alt={user.name}
                     />
                   ) : (
                     <span className="header__avatar header__avatar_empty">
-                      {user.data.name.split("")[0].toUpperCase()}
+                      {user.name.split("")[0].toUpperCase()}
                     </span>
                   )}
                 </div>
