@@ -1,9 +1,11 @@
-import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
 export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    email: "",
+    password: "",
+  });
 
   const formElements = {
     name: "login",
@@ -13,25 +15,15 @@ export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
     modal: "registration",
   };
 
-  function handleChange(e, setter) {
-    setter(e.target.value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    onLogin(
-      {
-        email: emailValue,
-        password: passwordValue,
-      },
-      handleReset
-    );
+    onLogin(values, handleReset);
   }
 
   function handleReset() {
-    setEmailValue("");
-    setPasswordValue("");
+    setValues({ email: "", password: "" });
   }
+
   return (
     <ModalWithForm
       onClose={onClose}
@@ -46,8 +38,8 @@ export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
           className="form__input"
           name="email"
           placeholder="Email"
-          value={emailValue}
-          onChange={(e) => handleChange(e, setEmailValue)}
+          value={values.email}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -60,8 +52,8 @@ export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
           id="form__password"
           name="password"
           placeholder="Password"
-          value={passwordValue}
-          onChange={(e) => handleChange(e, setPasswordValue)}
+          value={values.password}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>

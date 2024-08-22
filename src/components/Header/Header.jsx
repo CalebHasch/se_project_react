@@ -51,7 +51,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
             labels={{ first: "F", second: "C" }}
             switchId={"header"}
           />
-          {!user ? (
+          {user.name === "" ? (
             <div className="header__container">
               <button
                 className="header__add-button header__signup"
@@ -100,7 +100,7 @@ export default function Header({ weatherData, handleButtonClick, modal }) {
                 alt="menu"
                 onClick={toggleMobileMenu}
               />
-            ) : !user ? (
+            ) : user.name === "" ? (
               <div className="header__nav-container">
                 <button
                   className="header__close"

@@ -1,5 +1,5 @@
-import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
 export default function RegistrationModal({
   onClose,
@@ -7,10 +7,12 @@ export default function RegistrationModal({
   onRegister,
   isLoading,
 }) {
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
-  const [avatarUrlValue, setAvatarUrlValue] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
+  });
 
   const formElements = {
     name: "sign-up",
@@ -20,29 +22,11 @@ export default function RegistrationModal({
     modal: "login",
   };
 
-  function handleChange(e, setter) {
-    setter(e.target.value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    onRegister(
-      {
-        email: emailValue,
-        password: passwordValue,
-        name: nameValue,
-        avatar: avatarUrlValue,
-      },
-      handleReset
-    );
+    onRegister(values);
   }
 
-  function handleReset() {
-    setEmailValue("");
-    setPasswordValue("");
-    setAvatarUrlValue("");
-    setNameValue("");
-  }
   return (
     <ModalWithForm
       onClose={onClose}
@@ -57,8 +41,8 @@ export default function RegistrationModal({
           className="form__input"
           name="email"
           placeholder="Email"
-          value={emailValue}
-          onChange={(e) => handleChange(e, setEmailValue)}
+          value={values.email}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -70,8 +54,8 @@ export default function RegistrationModal({
           className="form__input"
           name="password"
           placeholder="Password"
-          value={passwordValue}
-          onChange={(e) => handleChange(e, setPasswordValue)}
+          value={values.password}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -83,8 +67,8 @@ export default function RegistrationModal({
           className="form__input"
           name="name"
           placeholder="Name"
-          value={nameValue}
-          onChange={(e) => handleChange(e, setNameValue)}
+          value={values.name}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -94,10 +78,10 @@ export default function RegistrationModal({
         <input
           type="url"
           className="form__input"
-          name="avatarUrl"
+          name="avatar"
           placeholder="Avatar URL"
-          value={avatarUrlValue}
-          onChange={(e) => handleChange(e, setAvatarUrlValue)}
+          value={values.avatar}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>

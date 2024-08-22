@@ -1,6 +1,7 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
 export default function EditProfileModal({
   onClose,
@@ -9,8 +10,10 @@ export default function EditProfileModal({
   isLoading,
 }) {
   const user = useContext(CurrentUserContext);
-  const [nameValue, setNameValue] = useState("");
-  const [avatarUrlValue, setAvatarUrlValue] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    name: user.name || "",
+    avatarUrl: user.avatar || "",
+  });
 
   const formElements = {
     name: "change-profile",
@@ -18,24 +21,16 @@ export default function EditProfileModal({
     buttonText: isLoading ? "Updating..." : "Save Changes",
   };
 
-  function handleChange(e, setter) {
-    setter(e.target.value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdate({
-      name: nameValue,
-      avatar: avatarUrlValue,
-    });
+    onUpdate(values);
   }
 
   useEffect(() => {
     if (user) {
-      setNameValue(user.name || "");
-      setAvatarUrlValue(user.avatar || "");
+      setValues({ name: user.name || "", avatarUrl: user.avatar || "" });
     }
-  }, [user]);
+  }, [user, setValues]);
 
   return (
     <ModalWithForm
@@ -51,8 +46,8 @@ export default function EditProfileModal({
           className="form__input"
           name="name"
           placeholder="Name"
-          value={nameValue}
-          onChange={(e) => handleChange(e, setNameValue)}
+          value={values.name}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -64,8 +59,9 @@ export default function EditProfileModal({
           className="form__input"
           name="avatarUrl"
           placeholder="Avatar URL"
-          value={avatarUrlValue}
-          onChange={(e) => handleChange(e, setAvatarUrlValue)}
+          value={values.avatarUrl}
+          onChange={(e) => handleChange(e, setValues)}
+          required
         />
         <span className="form__error"></span>
       </label>

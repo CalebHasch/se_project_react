@@ -33,7 +33,7 @@ import * as auth from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({ name: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weatherData, setWeatherData] = useState({
     temp: { F: "999", C: "999" },
@@ -51,19 +51,26 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("login");
 
+  function handleSubmit(request) {
+    setIsLoading(true);
+    request()
+      .then(closeModal)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }
+
   function handleRegistration({ name, email, password, avatar }) {
-    auth
-      .register(name, email, password, avatar)
-      .then(() => {
+    const makeRequest = () => {
+      return auth.register(name, email, password, avatar).then(() => {
         handleLogin({ email, password });
-      })
-      .catch(console.error);
+      });
+    };
+    handleSubmit(makeRequest);
   }
 
   function handleLogin({ email, password }) {
-    auth
-      .login(email, password)
-      .then((data) => {
+    const makeRequest = () => {
+      return auth.login(email, password).then((data) => {
         if (data.token) {
           setToken(data.token);
           auth
@@ -71,44 +78,39 @@ function App() {
             .then((data) => {
               setIsLoggedIn(true);
               setCurrentUser(data.data);
-              closeModal();
             })
             .catch(console.error);
         }
-      })
-      .catch(console.error);
+      });
+    };
+    handleSubmit(makeRequest);
   }
 
   function handleLogout() {
     removeToken();
     setIsLoggedIn(false);
-    setCurrentUser(null);
+    setCurrentUser({ name: "", avatar: "", email: "" });
   }
 
   function handleAddItemSubmit(item, reset) {
-    setIsLoading(true);
-    postClothingItem(item)
-      .then((res) => {
+    const makeRequest = () => {
+      return postClothingItem(item).then((res) => {
         setClothingItems([res.data, ...clothingItems]);
-        closeModal();
         reset();
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    };
+    handleSubmit(makeRequest);
   }
 
   function handleEditProfile({ name, avatar }) {
-    setIsLoading(true);
-    editUser({ name, avatar })
-      .then((res) => {
+    const makeRequest = () => {
+      return editUser({ name, avatar }).then((res) => {
         currentUser.name = res.data.name;
         currentUser.avatar = res.data.avatar;
-        closeModal();
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+        setCurrentUser(currentUser);
+      });
+    };
+    handleSubmit(makeRequest);
   }
 
   function handleCardLike({ _id, likes }) {
@@ -152,18 +154,14 @@ function App() {
   }
 
   function handleCardDelete() {
-    setIsLoading(true);
-    deleteClothingItem(modalClothingItem._id)
-      .then(() => {
+    const makeRequest = () => {
+      return deleteClothingItem(modalClothingItem._id).then(() => {
         setClothingItems(
           clothingItems.filter((item) => item._id !== modalClothingItem._id)
         );
-        closeModal();
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    };
+    handleSubmit(makeRequest);
   }
 
   useEffect(() => {

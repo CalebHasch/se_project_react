@@ -1,3 +1,4 @@
+import { processResponse } from "./api";
 export const BASE_URL = "http://127.0.0.1:3001";
 
 export const register = (name, email, password, avatar) => {
@@ -9,7 +10,7 @@ export const register = (name, email, password, avatar) => {
     },
     body: JSON.stringify({ name, email, password, avatar }),
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    return processResponse(res);
   });
 };
 
@@ -22,7 +23,7 @@ export const login = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    return processResponse(res);
   });
 };
 
@@ -35,6 +36,6 @@ export const getUser = (token) => {
       authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    return processResponse(res);
   });
 };

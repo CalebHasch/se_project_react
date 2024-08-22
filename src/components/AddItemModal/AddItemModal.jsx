@@ -1,5 +1,5 @@
-import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
 export default function AddItemModal({
   onClose,
@@ -7,9 +7,11 @@ export default function AddItemModal({
   onAddItem,
   isLoading,
 }) {
-  const [nameValue, setNameValue] = useState("");
-  const [imageUrlValue, setImageUrlValue] = useState("");
-  const [weatherValue, setWeatherValue] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
 
   const formElements = {
     name: "add-card",
@@ -17,26 +19,13 @@ export default function AddItemModal({
     buttonText: isLoading ? "Adding..." : "Add Garmet",
   };
 
-  function handleChange(e, setter) {
-    setter(e.target.value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    onAddItem(
-      {
-        name: nameValue,
-        imageUrl: imageUrlValue,
-        weather: weatherValue,
-      },
-      handleReset
-    );
+    onAddItem(values, handleReset);
   }
 
   function handleReset() {
-    setImageUrlValue("");
-    setNameValue("");
-    setWeatherValue("");
+    setValues({ name: "", imageUrl: "", weather: "" });
   }
 
   return (
@@ -54,8 +43,8 @@ export default function AddItemModal({
           id="form__name"
           name="name"
           placeholder="Name"
-          value={nameValue}
-          onChange={(e) => handleChange(e, setNameValue)}
+          value={values.name}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -68,8 +57,8 @@ export default function AddItemModal({
           id="form__image-url"
           name="imageUrl"
           placeholder="Image URL"
-          value={imageUrlValue}
-          onChange={(e) => handleChange(e, setImageUrlValue)}
+          value={values.imageUrl}
+          onChange={(e) => handleChange(e, setValues)}
           required
         />
         <span className="form__error"></span>
@@ -83,8 +72,8 @@ export default function AddItemModal({
             name="weather"
             value={"hot"}
             id="hot"
-            checked={weatherValue === "hot"}
-            onChange={(e) => handleChange(e, setWeatherValue)}
+            checked={values.weather === "hot"}
+            onChange={(e) => handleChange(e, setValues)}
             required
           />
           <label className="form__radio-label" htmlFor="hot">
@@ -98,8 +87,8 @@ export default function AddItemModal({
             name="weather"
             value={"warm"}
             id="warm"
-            checked={weatherValue === "warm"}
-            onChange={(e) => handleChange(e, setWeatherValue)}
+            checked={values.weather === "warm"}
+            onChange={(e) => handleChange(e, setValues)}
             required
           />
           <label className="form__radio-label" htmlFor="warm">
@@ -113,8 +102,8 @@ export default function AddItemModal({
             name="weather"
             value={"cold"}
             id="cold"
-            checked={weatherValue === "cold"}
-            onChange={(e) => handleChange(e, setWeatherValue)}
+            checked={values.weather === "cold"}
+            onChange={(e) => handleChange(e, setValues)}
             required
           />
           <label className="form__radio-label" htmlFor="cold">
