@@ -1,10 +1,6 @@
 import { getToken } from "./token";
-const token = getToken();
+let token;
 const baseUrl = "http://127.0.0.1:3001";
-const headers = {
-  "Content-Type": "application/json",
-  authorization: `Bearer ${token}`,
-};
 
 function processResponse(res) {
   if (res.ok) {
@@ -28,9 +24,13 @@ function getInitialClothes() {
 }
 
 function postClothingItem({ name, imageUrl, weather }) {
+  token = getToken();
   return request(`${baseUrl}/items`, {
     method: "POST",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name: name,
       imageUrl: imageUrl,
@@ -40,30 +40,46 @@ function postClothingItem({ name, imageUrl, weather }) {
 }
 
 function deleteClothingItem(itemId) {
+  token = getToken();
   return request(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }
 
 function addCardLike(itemId) {
+  token = getToken();
   return request(`${baseUrl}/items/${itemId}/likes`, {
     method: "PUT",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }
 
 function removeCardLike(itemId) {
+  token = getToken();
   return request(`${baseUrl}/items/${itemId}/likes`, {
     method: "DELETE",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }
 
 function editUser({ name, avatar }) {
+  token = getToken();
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name: name,
       avatar: avatar,

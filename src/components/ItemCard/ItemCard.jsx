@@ -1,9 +1,12 @@
 import { useEffect, useContext, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import AppContext from "../../contexts/AppContext";
 import "./ItemCard.css";
 
 export default function ItemCard({ clothes, handleCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
+  const isLoggedIn = useContext(AppContext);
+
   const [isLiked, setIsLiked] = useState(false);
 
   function handleLike() {
@@ -20,15 +23,23 @@ export default function ItemCard({ clothes, handleCardClick, onCardLike }) {
 
   return (
     <div className="item-card">
-      <div className="item-card__container">
-        <p className="item-card__name">{clothes.name}</p>
-        <button
-          className={cardLikeButtonClassName}
-          type="button"
-          onClick={handleLike}
-          aria-label="like"
-        ></button>
-      </div>
+      {isLoggedIn.isLoggedIn ? (
+        <div className="item-card__container">
+          <p className="item-card__name">{clothes.name}</p>
+          <button
+            className={cardLikeButtonClassName}
+            type="button"
+            onClick={handleLike}
+            aria-label="like"
+          />
+        </div>
+      ) : (
+        <div className="item-card__container">
+          <p className="item-card__name item-card__name_centered">
+            {clothes.name}
+          </p>
+        </div>
+      )}
       <img
         className="item-card__img"
         src={clothes.imageUrl}

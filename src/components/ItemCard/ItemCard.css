@@ -21,6 +21,10 @@
   z-index: 1;
 }
 
+.item-card__name_centered {
+  margin: 0 auto;
+}
+
 .item-card__like-icon {
   background-image: url("../../assets/like-icon-inactive.png");
   background-color: transparent;

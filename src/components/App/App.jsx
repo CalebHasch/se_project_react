@@ -55,7 +55,6 @@ function App() {
     auth
       .register(name, email, password, avatar)
       .then(() => {
-        console.log(email, password);
         handleLogin({ email, password });
       })
       .catch(console.error);
@@ -90,12 +89,14 @@ function App() {
     setIsLoading(true);
     postClothingItem(item)
       .then((res) => {
-        setClothingItems([res, ...clothingItems]);
+        setClothingItems([res.data, ...clothingItems]);
         closeModal();
         reset();
       })
       .catch(console.error)
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleEditProfile({ name, avatar }) {
@@ -198,7 +199,6 @@ function App() {
       .catch(console.error);
 
     if (jwt) {
-      console.log(jwt);
       auth
         .getUser(jwt)
         .then((data) => {
