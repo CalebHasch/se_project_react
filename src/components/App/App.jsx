@@ -220,7 +220,9 @@ function App() {
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, setCurrentTemperatureUnit }}
           >
-            <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+            <AppContext.Provider
+              value={{ isLoggedIn, setIsLoggedIn, isLoading }}
+            >
               <div className="page__content">
                 <Header
                   weatherData={weatherData}
@@ -262,32 +264,27 @@ function App() {
                 isOpen={activeModal === "add-garment"}
                 onAddItem={handleAddItemSubmit}
                 clothingItems={clothingItems}
-                isLoading={isLoading}
               />
               <ItemModal
                 clothingItem={modalClothingItem}
                 onClose={closeModal}
                 isOpen={activeModal === "item-modal"}
                 onDelete={handleCardDelete}
-                isLoading={isLoading}
               />
               <RegistrationModal
                 onClose={closeModal}
                 isOpen={activeModal === "registration"}
                 onRegister={handleRegistration}
-                isLoading={isLoading}
               />
               <EditProfileModal
                 onClose={closeModal}
                 isOpen={activeModal === "edit-profile"}
                 onUpdate={handleEditProfile}
-                isLoading={isLoading}
               />
               <LoginModal
                 onClose={closeModal}
                 isOpen={activeModal === "login"}
                 onLogin={handleLogin}
-                isLoading={isLoading}
               />
             </AppContext.Provider>
           </CurrentTemperatureUnitContext.Provider>

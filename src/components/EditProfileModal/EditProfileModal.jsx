@@ -2,13 +2,10 @@ import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import AppContext from "../../contexts/AppContext";
 
-export default function EditProfileModal({
-  onClose,
-  isOpen,
-  onUpdate,
-  isLoading,
-}) {
+export default function EditProfileModal({ onClose, isOpen, onUpdate }) {
+  const { isLoading } = useContext(AppContext);
   const user = useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({
     name: user.name || "",
@@ -47,7 +44,7 @@ export default function EditProfileModal({
           name="name"
           placeholder="Name"
           value={values.name}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -60,7 +57,7 @@ export default function EditProfileModal({
           name="avatarUrl"
           placeholder="Avatar URL"
           value={values.avatarUrl}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>

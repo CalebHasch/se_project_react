@@ -1,13 +1,11 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useContext } from "react";
+import AppContext from "../../contexts/AppContext";
 
-export default function RegistrationModal({
-  onClose,
-  isOpen,
-  onRegister,
-  isLoading,
-}) {
-  const { values, handleChange, setValues } = useForm({
+export default function RegistrationModal({ onClose, isOpen, onRegister }) {
+  const { isLoading } = useContext(AppContext);
+  const { values, handleChange } = useForm({
     email: "",
     password: "",
     name: "",
@@ -42,7 +40,7 @@ export default function RegistrationModal({
           name="email"
           placeholder="Email"
           value={values.email}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -55,7 +53,7 @@ export default function RegistrationModal({
           name="password"
           placeholder="Password"
           value={values.password}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -68,7 +66,7 @@ export default function RegistrationModal({
           name="name"
           placeholder="Name"
           value={values.name}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -81,7 +79,7 @@ export default function RegistrationModal({
           name="avatar"
           placeholder="Avatar URL"
           value={values.avatar}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>

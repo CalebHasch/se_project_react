@@ -1,12 +1,10 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useContext } from "react";
+import AppContext from "../../contexts/AppContext";
 
-export default function AddItemModal({
-  onClose,
-  isOpen,
-  onAddItem,
-  isLoading,
-}) {
+export default function AddItemModal({ onClose, isOpen, onAddItem }) {
+  const { isLoading } = useContext(AppContext);
   const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
@@ -44,7 +42,7 @@ export default function AddItemModal({
           name="name"
           placeholder="Name"
           value={values.name}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -58,7 +56,7 @@ export default function AddItemModal({
           name="imageUrl"
           placeholder="Image URL"
           value={values.imageUrl}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -73,7 +71,7 @@ export default function AddItemModal({
             value={"hot"}
             id="hot"
             checked={values.weather === "hot"}
-            onChange={(e) => handleChange(e, setValues)}
+            onChange={handleChange}
             required
           />
           <label className="form__radio-label" htmlFor="hot">
@@ -88,7 +86,7 @@ export default function AddItemModal({
             value={"warm"}
             id="warm"
             checked={values.weather === "warm"}
-            onChange={(e) => handleChange(e, setValues)}
+            onChange={handleChange}
             required
           />
           <label className="form__radio-label" htmlFor="warm">
@@ -103,7 +101,7 @@ export default function AddItemModal({
             value={"cold"}
             id="cold"
             checked={values.weather === "cold"}
-            onChange={(e) => handleChange(e, setValues)}
+            onChange={handleChange}
             required
           />
           <label className="form__radio-label" htmlFor="cold">

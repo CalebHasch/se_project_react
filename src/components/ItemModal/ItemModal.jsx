@@ -2,14 +2,10 @@ import "../Modal.css";
 import "./ItemModal.css";
 import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import AppContext from "../../contexts/AppContext";
 
-export default function ItemModal({
-  onClose,
-  isOpen,
-  clothingItem,
-  onDelete,
-  isLoading,
-}) {
+export default function ItemModal({ onClose, isOpen, clothingItem, onDelete }) {
+  const { isLoading } = useContext(AppContext);
   const currentUser = useContext(CurrentUserContext);
   const [isOwn, setIsOwn] = useState(false);
 

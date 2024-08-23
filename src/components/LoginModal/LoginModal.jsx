@@ -1,7 +1,10 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useContext } from "react";
+import AppContext from "../../contexts/AppContext";
 
-export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
+export default function LoginModal({ onClose, isOpen, onLogin }) {
+  const { isLoading } = useContext(AppContext);
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
@@ -39,7 +42,7 @@ export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
           name="email"
           placeholder="Email"
           value={values.email}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
@@ -53,7 +56,7 @@ export default function LoginModal({ onClose, isOpen, onLogin, isLoading }) {
           name="password"
           placeholder="Password"
           value={values.password}
-          onChange={(e) => handleChange(e, setValues)}
+          onChange={handleChange}
           required
         />
         <span className="form__error"></span>
