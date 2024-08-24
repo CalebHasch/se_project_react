@@ -1,15 +1,16 @@
 import { useContext } from "react";
 import { ActiveModalContext } from "../../contexts/ActiveModalContext";
+import AppContext from "../../contexts/AppContext";
 import "./ModalWithForm.css";
 import "../Modal.css";
 
 export default function ModalWithForm({
-  onClose,
   isOpen,
   formElements,
   onSubmit,
   children,
 }) {
+  const { closeModal } = useContext(AppContext);
   const setActiveModal = useContext(ActiveModalContext);
 
   function changeModal() {
@@ -31,7 +32,7 @@ export default function ModalWithForm({
           className="form__close-button modal__close"
           type="button"
           aria-label="close"
-          onClick={() => onClose()}
+          onClick={closeModal}
         />
         <fieldset className="form__set">
           <p className="form__title">{formElements.title}</p>

@@ -8,7 +8,6 @@ export default function ClothesSection({
   handleCardClick,
   handleButtonClick,
   handleCardLike,
-  modal,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -18,7 +17,9 @@ export default function ClothesSection({
         <p className="clothes-section__text">Your Items</p>
         <button
           className="clothes-section__button"
-          onClick={() => handleButtonClick(modal)}
+          onClick={() => {
+            handleButtonClick("add-garment");
+          }}
         >
           + Add new
         </button>

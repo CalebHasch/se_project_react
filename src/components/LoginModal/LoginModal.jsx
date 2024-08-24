@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import { useContext } from "react";
 import AppContext from "../../contexts/AppContext";
 
-export default function LoginModal({ onClose, isOpen, onLogin }) {
+export default function LoginModal({ isOpen, onLogin }) {
   const { isLoading } = useContext(AppContext);
   const { values, handleChange, setValues } = useForm({
     email: "",
@@ -29,7 +29,6 @@ export default function LoginModal({ onClose, isOpen, onLogin }) {
 
   return (
     <ModalWithForm
-      onClose={onClose}
       isOpen={isOpen}
       formElements={formElements}
       onSubmit={handleSubmit}

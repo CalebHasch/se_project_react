@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import { useContext } from "react";
 import AppContext from "../../contexts/AppContext";
 
-export default function RegistrationModal({ onClose, isOpen, onRegister }) {
+export default function RegistrationModal({ isOpen, onRegister }) {
   const { isLoading } = useContext(AppContext);
   const { values, handleChange } = useForm({
     email: "",
@@ -27,7 +27,6 @@ export default function RegistrationModal({ onClose, isOpen, onRegister }) {
 
   return (
     <ModalWithForm
-      onClose={onClose}
       isOpen={isOpen}
       formElements={formElements}
       onSubmit={handleSubmit}

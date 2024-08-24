@@ -105,9 +105,12 @@ function App() {
   function handleEditProfile({ name, avatar }) {
     const makeRequest = () => {
       return editUser({ name, avatar }).then((res) => {
-        currentUser.name = res.data.name;
-        currentUser.avatar = res.data.avatar;
-        setCurrentUser(currentUser);
+        setCurrentUser((prevData) => {
+          return {
+            ...prevData,
+            ...res.data,
+          };
+        });
       });
     };
     handleSubmit(makeRequest);
@@ -214,14 +217,14 @@ function App() {
   }, [weatherData, clothingItems]);
 
   return (
-    <ActiveModalContext.Provider value={setActiveModal}>
+    <ActiveModalContext.Provider value={{ activeModal, setActiveModal }}>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, setCurrentTemperatureUnit }}
           >
             <AppContext.Provider
-              value={{ isLoggedIn, setIsLoggedIn, isLoading }}
+              value={{ isLoggedIn, setIsLoggedIn, isLoading, closeModal }}
             >
               <div className="page__content">
                 <Header
@@ -251,7 +254,6 @@ function App() {
                           handleButtonClick={openModal}
                           handleLogout={handleLogout}
                           handleCardLike={handleCardLike}
-                          modal={"add-garment"}
                         />
                       </ProtectedRoute>
                     }
@@ -260,29 +262,24 @@ function App() {
                 <Footer />
               </div>
               <AddItemModal
-                onClose={closeModal}
                 isOpen={activeModal === "add-garment"}
                 onAddItem={handleAddItemSubmit}
                 clothingItems={clothingItems}
               />
               <ItemModal
                 clothingItem={modalClothingItem}
-                onClose={closeModal}
                 isOpen={activeModal === "item-modal"}
                 onDelete={handleCardDelete}
               />
               <RegistrationModal
-                onClose={closeModal}
                 isOpen={activeModal === "registration"}
                 onRegister={handleRegistration}
               />
               <EditProfileModal
-                onClose={closeModal}
                 isOpen={activeModal === "edit-profile"}
                 onUpdate={handleEditProfile}
               />
               <LoginModal
-                onClose={closeModal}
                 isOpen={activeModal === "login"}
                 onLogin={handleLogin}
               />

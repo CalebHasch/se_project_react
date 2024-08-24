@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import AppContext from "../../contexts/AppContext";
 
-export default function ItemModal({ onClose, isOpen, clothingItem, onDelete }) {
-  const { isLoading } = useContext(AppContext);
+export default function ItemModal({ isOpen, clothingItem, onDelete }) {
+  const { isLoading, closeModal } = useContext(AppContext);
   const currentUser = useContext(CurrentUserContext);
   const [isOwn, setIsOwn] = useState(false);
 
@@ -24,7 +24,7 @@ export default function ItemModal({ onClose, isOpen, clothingItem, onDelete }) {
           className="card__close-button modal__close modal__close_color_white"
           type="button"
           aria-label="close"
-          onClick={() => onClose()}
+          onClick={closeModal}
         ></button>
         <img
           className="card__image"

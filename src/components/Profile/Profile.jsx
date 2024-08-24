@@ -8,7 +8,6 @@ export default function Profile({
   handleButtonClick,
   handleLogout,
   handleCardLike,
-  modal,
 }) {
   return (
     <div className="profile">
@@ -18,7 +17,6 @@ export default function Profile({
         handleCardClick={handleCardClick}
         handleButtonClick={handleButtonClick}
         handleCardLike={handleCardLike}
-        modal={modal}
       />
     </div>
   );

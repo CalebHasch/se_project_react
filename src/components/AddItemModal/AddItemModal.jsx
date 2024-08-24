@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import { useContext } from "react";
 import AppContext from "../../contexts/AppContext";
 
-export default function AddItemModal({ onClose, isOpen, onAddItem }) {
+export default function AddItemModal({ isOpen, onAddItem }) {
   const { isLoading } = useContext(AppContext);
   const { values, handleChange, setValues } = useForm({
     name: "",
@@ -28,7 +28,6 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
 
   return (
     <ModalWithForm
-      onClose={onClose}
       isOpen={isOpen}
       formElements={formElements}
       onSubmit={handleSubmit}
