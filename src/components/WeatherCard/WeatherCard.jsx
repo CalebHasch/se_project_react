@@ -20,7 +20,7 @@ export default function WeatherCard({ weatherData }) {
     if (bannerSet[data.condition]) {
       return bannerSet[data.condition];
     } else {
-      return bannerSet.clear;
+      return bannerSet.Clear;
     }
   }
 
