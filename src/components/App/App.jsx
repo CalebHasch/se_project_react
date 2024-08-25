@@ -262,27 +262,16 @@ function App() {
                 <Footer />
               </div>
               <AddItemModal
-                isOpen={activeModal === "add-garment"}
                 onAddItem={handleAddItemSubmit}
                 clothingItems={clothingItems}
               />
               <ItemModal
                 clothingItem={modalClothingItem}
-                isOpen={activeModal === "item-modal"}
                 onDelete={handleCardDelete}
               />
-              <RegistrationModal
-                isOpen={activeModal === "registration"}
-                onRegister={handleRegistration}
-              />
-              <EditProfileModal
-                isOpen={activeModal === "edit-profile"}
-                onUpdate={handleEditProfile}
-              />
-              <LoginModal
-                isOpen={activeModal === "login"}
-                onLogin={handleLogin}
-              />
+              <RegistrationModal onRegister={handleRegistration} />
+              <EditProfileModal onUpdate={handleEditProfile} />
+              <LoginModal onLogin={handleLogin} />
             </AppContext.Provider>
           </CurrentTemperatureUnitContext.Provider>
         </div>

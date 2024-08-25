@@ -1,10 +1,12 @@
 import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { ActiveModalContext } from "../../contexts/ActiveModalContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import AppContext from "../../contexts/AppContext";
 
-export default function EditProfileModal({ isOpen, onUpdate }) {
+export default function EditProfileModal({ onUpdate }) {
+  const { activeModal } = useContext(ActiveModalContext);
   const { isLoading } = useContext(AppContext);
   const user = useContext(CurrentUserContext);
 
@@ -32,7 +34,7 @@ export default function EditProfileModal({ isOpen, onUpdate }) {
 
   return (
     <ModalWithForm
-      isOpen={isOpen}
+      isOpen={activeModal === "edit-profile"}
       formElements={formElements}
       onSubmit={handleSubmit}
     >

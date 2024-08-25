@@ -2,9 +2,11 @@ import "../Modal.css";
 import "./ItemModal.css";
 import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { ActiveModalContext } from "../../contexts/ActiveModalContext";
 import AppContext from "../../contexts/AppContext";
 
-export default function ItemModal({ isOpen, clothingItem, onDelete }) {
+export default function ItemModal({ clothingItem, onDelete }) {
+  const { activeModal } = useContext(ActiveModalContext);
   const { isLoading, closeModal } = useContext(AppContext);
   const currentUser = useContext(CurrentUserContext);
   const [isOwn, setIsOwn] = useState(false);
@@ -18,7 +20,10 @@ export default function ItemModal({ isOpen, clothingItem, onDelete }) {
   }, [currentUser, clothingItem]);
 
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`} id="itemModal">
+    <div
+      className={`modal ${activeModal === "item-modal" && "modal_opened"}`}
+      id="itemModal"
+    >
       <div className="modal__card card">
         <button
           className="card__close-button modal__close modal__close_color_white"

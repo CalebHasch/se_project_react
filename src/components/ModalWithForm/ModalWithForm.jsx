@@ -11,7 +11,7 @@ export default function ModalWithForm({
   children,
 }) {
   const { closeModal } = useContext(AppContext);
-  const setActiveModal = useContext(ActiveModalContext);
+  const { setActiveModal } = useContext(ActiveModalContext);
 
   function changeModal() {
     setActiveModal(formElements.modal);

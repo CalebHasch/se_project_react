@@ -1,9 +1,11 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useContext } from "react";
+import { ActiveModalContext } from "../../contexts/ActiveModalContext";
 import AppContext from "../../contexts/AppContext";
 
-export default function AddItemModal({ isOpen, onAddItem }) {
+export default function AddItemModal({ onAddItem }) {
+  const { activeModal } = useContext(ActiveModalContext);
   const { isLoading } = useContext(AppContext);
   const { values, handleChange, setValues } = useForm({
     name: "",
@@ -28,7 +30,7 @@ export default function AddItemModal({ isOpen, onAddItem }) {
 
   return (
     <ModalWithForm
-      isOpen={isOpen}
+      isOpen={activeModal === "add-garment"}
       formElements={formElements}
       onSubmit={handleSubmit}
     >

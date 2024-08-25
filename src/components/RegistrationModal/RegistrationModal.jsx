@@ -1,9 +1,11 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useContext } from "react";
+import { ActiveModalContext } from "../../contexts/ActiveModalContext";
 import AppContext from "../../contexts/AppContext";
 
-export default function RegistrationModal({ isOpen, onRegister }) {
+export default function RegistrationModal({ onRegister }) {
+  const { activeModal } = useContext(ActiveModalContext);
   const { isLoading } = useContext(AppContext);
   const { values, handleChange } = useForm({
     email: "",
@@ -27,7 +29,7 @@ export default function RegistrationModal({ isOpen, onRegister }) {
 
   return (
     <ModalWithForm
-      isOpen={isOpen}
+      isOpen={activeModal === "registration"}
       formElements={formElements}
       onSubmit={handleSubmit}
     >

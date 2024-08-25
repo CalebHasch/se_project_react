@@ -1,9 +1,11 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useContext } from "react";
+import { ActiveModalContext } from "../../contexts/ActiveModalContext";
 import AppContext from "../../contexts/AppContext";
 
-export default function LoginModal({ isOpen, onLogin }) {
+export default function LoginModal({ onLogin }) {
+  const { activeModal } = useContext(ActiveModalContext);
   const { isLoading } = useContext(AppContext);
   const { values, handleChange, setValues } = useForm({
     email: "",
@@ -29,7 +31,7 @@ export default function LoginModal({ isOpen, onLogin }) {
 
   return (
     <ModalWithForm
-      isOpen={isOpen}
+      isOpen={activeModal === "login"}
       formElements={formElements}
       onSubmit={handleSubmit}
     >
