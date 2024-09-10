@@ -1,6 +1,6 @@
 import { getToken } from "./token";
 let token;
-const baseUrl = "http://127.0.0.1:3001";
+import { BASE_URL } from "./auth";
 
 function processResponse(res) {
   if (res.ok) {
@@ -14,7 +14,7 @@ function request(url, options) {
 }
 
 function getInitialClothes() {
-  return request(`${baseUrl}/items`, {
+  return request(`${BASE_URL}/items`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -25,7 +25,7 @@ function getInitialClothes() {
 
 function postClothingItem({ name, imageUrl, weather }) {
   token = getToken();
-  return request(`${baseUrl}/items`, {
+  return request(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function postClothingItem({ name, imageUrl, weather }) {
 
 function deleteClothingItem(itemId) {
   token = getToken();
-  return request(`${baseUrl}/items/${itemId}`, {
+  return request(`${BASE_URL}/items/${itemId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function deleteClothingItem(itemId) {
 
 function addCardLike(itemId) {
   token = getToken();
-  return request(`${baseUrl}/items/${itemId}/likes`, {
+  return request(`${BASE_URL}/items/${itemId}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function addCardLike(itemId) {
 
 function removeCardLike(itemId) {
   token = getToken();
-  return request(`${baseUrl}/items/${itemId}/likes`, {
+  return request(`${BASE_URL}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -74,7 +74,7 @@ function removeCardLike(itemId) {
 
 function editUser({ name, avatar }) {
   token = getToken();
-  return request(`${baseUrl}/users/me`, {
+  return request(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
