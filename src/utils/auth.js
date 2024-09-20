@@ -1,8 +1,5 @@
 import { processResponse } from "./api";
-export const BASE_URL = "https://calebhaschwtwr.crabdance.com";
-process.env.NODE_ENV === "production"
-  ? "https://calebhaschwtwr.crabdance.com"
-  : "http://127.0.0.1:3001";
+import { BASE_URL } from "./constants";
 
 export const register = (name, email, password, avatar) => {
   return fetch(`${BASE_URL}/signup`, {

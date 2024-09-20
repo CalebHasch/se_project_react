@@ -35,5 +35,9 @@ const APIkey = "7ea7645c306017f13db7782b47777322";
 const latitude = 36.316154;
 const longitude = -82.353031;
 const baseUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`;
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.calebhaschwtwr.crabdance.com"
+    : "http://127.0.0.1:3001";
 
-export { baseUrl, nightBanners, dayBanners };
+export { baseUrl, nightBanners, dayBanners, BASE_URL };

@@ -1,6 +1,6 @@
 import { getToken } from "./token";
 let token;
-import { BASE_URL } from "./auth";
+import { BASE_URL } from "./constants";
 
 function processResponse(res) {
   if (res.ok) {
